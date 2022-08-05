@@ -14,7 +14,7 @@ GO
 DECLARE @x NVARCHAR(MAX) =
   (SELECT *
      FROM Sales.vStkGrpSldbyName
-     FOR JSON AUTO, INCLUDE_NULL_VALUES)
+     FOR JSON PATH, INCLUDE_NULL_VALUES)
 insert into dbo.Archive
 select @x 
 GO
