@@ -20,9 +20,9 @@ ETL can help with data privacy and compliance by cleaning sensitive and secure d
 | Pros | Improves compliance | Lower upfront development costs |
 | Pros | Well-developed tools | More flexibility |
 | Cons | Legacy ETL is slow | Overgeneralization |
-| Pros | Frequent maintenance | Security gaps |
-| Pros | Higher Upfront Cost | Compliance risk |
-| Pros |  | Increased Latency |
+| Cons | Frequent maintenance | Security gaps |
+| Cons | Higher Upfront Cost | Compliance risk |
+| Cons |  | Increased Latency |
 
 ### Advantages of ETL Processes
 
