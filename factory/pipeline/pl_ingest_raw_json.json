@@ -127,9 +127,14 @@
 						"referenceName": "ds_movie_raw_json_adls",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"itemName",
+						"itemType",
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"modifiedDatetimeStart": "2022-09-01T00:00:00.834Z",
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
