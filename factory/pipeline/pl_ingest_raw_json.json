@@ -71,31 +71,11 @@
 										"type": "JsonReadSettings"
 									}
 								},
-								"sink": {
-									"type": "JsonSink",
-									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings",
-										"metadata": [
-											{
-												"value": ""
-											}
-										]
-									},
-									"formatSettings": {
-										"type": "JsonWriteSettings"
-									}
-								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
 									"referenceName": "ds_movie_raw_json_adls",
-									"type": "DatasetReference"
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_movie_raw_json_ablob",
 									"type": "DatasetReference"
 								}
 							]
