@@ -14,6 +14,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "pl_raw_to_bronze",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_bronze",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"annotations": []
