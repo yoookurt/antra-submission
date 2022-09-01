@@ -18,11 +18,58 @@
 			{
 				"name": "pl_raw_to_bronze",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "pl_ingest_raw_json",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "pl_raw_to_bronze",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_bronze_to_silver",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pl_raw_to_bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_bronze_to_silver",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_silver_update",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pl_bronze_to_silver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_silver_update",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
