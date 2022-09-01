@@ -1,11 +1,11 @@
 {
-	"name": "movie_json",
+	"name": "movie",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"basepath": "\\dataset\\"
+				"basepath": "\"adlscontainer01/dataset/\""
 			}
 		},
 		"annotations": [],
