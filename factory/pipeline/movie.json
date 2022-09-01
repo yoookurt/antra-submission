@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "raw_to_bronze",
+				"name": "pl_ingest_raw_json",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "bronze_to_silver",
+				"name": "pl_raw_to_bronze",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
