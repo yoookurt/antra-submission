@@ -8,15 +8,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": true
-				}
-			},
-			{
-				"name": "pl_raw_to_bronze",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_ingest_raw_json",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			}
