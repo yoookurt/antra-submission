@@ -8,10 +8,15 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pipeline2",
-						"type": "PipelineReference"
-					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "bronze_to_silver",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
 					"waitOnCompletion": true
 				}
 			}
