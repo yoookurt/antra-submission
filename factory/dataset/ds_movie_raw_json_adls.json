@@ -5,7 +5,16 @@
 			"referenceName": "adls_movie",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"basepath": "dataset"
+				"basepath": {
+					"value": "@dataset().base_path",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"base_path": {
+				"type": "String",
+				"defaultValue": "movie"
 			}
 		},
 		"annotations": [],
