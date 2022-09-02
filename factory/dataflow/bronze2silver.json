@@ -50,6 +50,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "window1"
 				}
 			],
 			"scriptLines": [
@@ -85,9 +88,10 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
 				"select4 aggregate(groupBy(Language),",
-				"     fLanguage = first(Language),",
-				"          cnt = count(Language)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"     cnt = count(Language)) ~> aggregate1",
+				"aggregate1 window(over(Language),",
+				"     asc(Language, true)) ~> window1",
+				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
