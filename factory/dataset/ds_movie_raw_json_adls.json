@@ -12,6 +12,10 @@
 			"sourcepath": {
 				"type": "String",
 				"defaultValue": "movie/raw"
+			},
+			"source_file": {
+				"type": "String",
+				"defaultValue": "movie*.json"
 			}
 		},
 		"annotations": [],
@@ -19,6 +23,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().source_file",
+					"type": "Expression"
+				},
 				"folderPath": {
 					"value": "@dataset().sourcepath",
 					"type": "Expression"
