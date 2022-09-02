@@ -65,6 +65,9 @@
 				},
 				{
 					"name": "select7"
+				},
+				{
+					"name": "select8"
 				}
 			],
 			"scriptLines": [
@@ -148,6 +151,33 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
+				"lookup1 select(mapColumn(",
+				"          MovieId,",
+				"          BackdropUrl,",
+				"          Budget,",
+				"          CreatedBy,",
+				"          CreatedDate,",
+				"          ImdbUrl,",
+				"          Overview,",
+				"          PosterUrl,",
+				"          Price,",
+				"          ReleaseDate,",
+				"          Revenue,",
+				"          RunTime,",
+				"          Tagline,",
+				"          Title,",
+				"          TmdbUrl,",
+				"          UpdatedBy,",
+				"          UpdatedDate,",
+				"          GenreId,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          SourceFile,",
+				"          LangId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select8",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
