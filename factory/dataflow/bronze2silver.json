@@ -61,6 +61,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
+				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> source1",
