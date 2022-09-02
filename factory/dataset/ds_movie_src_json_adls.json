@@ -12,7 +12,7 @@
 			},
 			"source_file": {
 				"type": "String",
-				"defaultValue": "movie*.json"
+				"defaultValue": "movie_0.json"
 			}
 		},
 		"annotations": [],
