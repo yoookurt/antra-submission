@@ -14,7 +14,7 @@
 		"parameters": {
 			"base_path": {
 				"type": "String",
-				"defaultValue": "movie"
+				"defaultValue": "movie/raw"
 			}
 		},
 		"annotations": [],
