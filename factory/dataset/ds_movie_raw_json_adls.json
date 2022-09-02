@@ -3,13 +3,7 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"basepath": {
-					"value": "@dataset().base_path",
-					"type": "Expression"
-				}
-			}
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"base_path": {
@@ -22,6 +16,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().base_path",
+					"type": "Expression"
+				},
 				"fileSystem": "adlscontainer01"
 			}
 		},
