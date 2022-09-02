@@ -20,6 +20,11 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
+							"wildcardFolderPath": {
+								"value": "@pipeline().parameters.raw_path",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -129,6 +134,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"raw_path": {
+				"type": "String",
+				"defaultValue": "raw"
+			}
+		},
 		"annotations": []
 	}
 }
