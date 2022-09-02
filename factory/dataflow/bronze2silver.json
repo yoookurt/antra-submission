@@ -59,7 +59,7 @@
 				"          p_IngestDate as date,",
 				"          Status as string",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
