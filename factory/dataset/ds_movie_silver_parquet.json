@@ -21,11 +21,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "{@dataset().bronze}.parquet",
+					"value": "@dataset().silver",
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().bronze_path",
+					"value": "@dataset().silver_path",
 					"type": "Expression"
 				},
 				"fileSystem": "adlscontainer01"
