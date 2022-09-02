@@ -11,7 +11,7 @@
 		"parameters": {
 			"source_path": {
 				"type": "String",
-				"defaultValue": "movie/raw"
+				"defaultValue": "dataset"
 			},
 			"source_file": {
 				"type": "String",
