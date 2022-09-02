@@ -34,6 +34,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -49,12 +52,18 @@
 				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> source1",
 				"source1 derive(genre = flatten(movie.genres)) ~> derivedColumn1",
-				"derivedColumn1 select(mapColumn(",
+				"select2 select(mapColumn(",
 				"          MovieId = movie[1].Id,",
 				"          GenreId = movie[1].genres[1].id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"derivedColumn1 select(mapColumn(",
+				"          GenreId = movie[1].genres[1].id,",
+				"          GenreName = movie[1].genres[1].name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
