@@ -38,7 +38,7 @@
 				"derivedColumn1 sink(allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
-				"     umask: 0022,",
+				"     umask: 0622,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
