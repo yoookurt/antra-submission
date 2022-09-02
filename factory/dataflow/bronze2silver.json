@@ -9,7 +9,7 @@
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "bronze"
 				}
 			],
 			"sinks": [
@@ -40,6 +40,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink4"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink5"
 				}
 			],
 			"transformations": [
@@ -86,10 +93,10 @@
 					"name": "derivedColumn1"
 				},
 				{
-					"name": "alterRow1"
+					"name": "select10"
 				},
 				{
-					"name": "select10"
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -104,20 +111,20 @@
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
-				"     format: 'parquet') ~> source1",
-				"source1 select(mapColumn(",
+				"     format: 'parquet') ~> bronze",
+				"bronze select(mapColumn(",
 				"          MovieId = movie[1].Id,",
 				"          GenreId = movie[1].genres[1].id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"source1 select(mapColumn(",
+				"bronze select(mapColumn(",
 				"          GenreId = movie[1].genres[1].id,",
 				"          GenreName = movie[1].genres[1].name",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"source1 select(mapColumn(",
+				"bronze select(mapColumn(",
 				"          Language = movie[1].OriginalLanguage",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -145,7 +152,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
-				"source1 select(mapColumn(",
+				"bronze select(mapColumn(",
 				"          movie,",
 				"          MovieId = movie[1].Id,",
 				"          BackdropUrl = movie[1].BackdropUrl,",
@@ -212,7 +219,6 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select9",
 				"select9 derive(Status = \"quarantine\") ~> derivedColumn1",
-				"derivedColumn1 alterRow() ~> alterRow1",
 				"split1@clean select(mapColumn(",
 				"          MovieId,",
 				"          BackdropUrl,",
@@ -239,6 +245,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select10",
+				"bronze alterRow(upsertIf(Status == \"quarantine\")) ~> alterRow1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -271,7 +278,15 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink4"
+				"     skipDuplicateMapOutputs: true) ~> sink4",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0622,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink5"
 			]
 		}
 	}
