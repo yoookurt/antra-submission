@@ -10,9 +10,9 @@
 				"type": "string",
 				"defaultValue": "movie/silver"
 			},
-			"silver": {
+			"movie": {
 				"type": "String",
-				"defaultValue": "silver_table"
+				"defaultValue": "movie"
 			}
 		},
 		"annotations": [],
@@ -21,7 +21,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": {
-					"value": "@dataset().silver_path",
+					"value": "@{dataset().silver_path}/{dataset().movie}",
 					"type": "Expression"
 				},
 				"fileSystem": "adlscontainer01"
