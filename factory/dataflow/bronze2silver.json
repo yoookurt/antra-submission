@@ -26,6 +26,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_genre_silver_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
 				}
 			],
 			"transformations": [
@@ -36,7 +43,7 @@
 					"name": "select1"
 				},
 				{
-					"name": "select2"
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -52,18 +59,18 @@
 				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> source1",
 				"source1 derive(genre = flatten(movie.genres)) ~> derivedColumn1",
-				"select2 select(mapColumn(",
+				"derivedColumn1 select(mapColumn(",
 				"          MovieId = movie[1].Id,",
 				"          GenreId = movie[1].genres[1].id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"derivedColumn1 select(mapColumn(",
-				"          GenreId = movie[1].genres[1].id,",
-				"          GenreName = movie[1].genres[1].name",
+				"          GenreId = {movie[1].genres[1].id},",
+				"          GenreName = {movie[1].genres[1].name}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
+				"     skipDuplicateMapOutputs: true) ~> select3",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -80,7 +87,15 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1) ~> sink2"
+				"     saveOrder: 1) ~> sink2",
+				"select3 sink(allowSchemaDrift: false,",
+				"     validateSchema: true,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink3"
 			]
 		}
 	}
