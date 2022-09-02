@@ -117,7 +117,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select7, window1 lookup(select5@Language == select5@Language,",
+				"select7, window1 lookup(select7@Language == select5@Language,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
