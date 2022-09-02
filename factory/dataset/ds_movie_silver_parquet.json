@@ -6,11 +6,11 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"bronze_path": {
+			"silver_path": {
 				"type": "string",
 				"defaultValue": "movie/silver"
 			},
-			"bronze": {
+			"silver": {
 				"type": "String",
 				"defaultValue": "silver_table"
 			}
