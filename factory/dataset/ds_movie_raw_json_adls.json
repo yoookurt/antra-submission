@@ -8,16 +8,6 @@
 				"basepath": "\"adlscontainer01/movie/\""
 			}
 		},
-		"parameters": {
-			"rawpath": {
-				"type": "string",
-				"defaultValue": "raw"
-			},
-			"silverpath": {
-				"type": "string",
-				"defaultValue": "silver"
-			}
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
