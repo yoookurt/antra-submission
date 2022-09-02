@@ -132,7 +132,7 @@
 				"          p_IngestDate,",
 				"          Status,",
 				"          SourceFile,",
-				"          GenreId = movie[1].genres[1].id",
+				"          GenreId = {genre.id}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
