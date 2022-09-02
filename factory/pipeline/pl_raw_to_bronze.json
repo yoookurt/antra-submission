@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
+							"modifiedDatetimeStart": "2022-09-02T00:00:00.876Z",
 							"wildcardFolderPath": {
 								"value": "adlscontainer01/@pipeline().parameters.raw_path",
 								"type": "Expression"
