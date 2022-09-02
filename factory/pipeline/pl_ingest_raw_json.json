@@ -53,7 +53,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"source_path": "dataset",
-							"source_file": "movie*.json"
+							"source_file": "movie_0.json"
 						}
 					}
 				],
