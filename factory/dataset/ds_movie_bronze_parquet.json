@@ -9,6 +9,10 @@
 			"bronze_path": {
 				"type": "string",
 				"defaultValue": "bronze"
+			},
+			"bronze": {
+				"type": "String",
+				"defaultValue": "bronze_table"
 			}
 		},
 		"annotations": [],
@@ -16,6 +20,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "{@dataset().bronze}.parquet",
+					"type": "Expression"
+				},
 				"folderPath": {
 					"value": "@dataset().bronze_path",
 					"type": "Expression"
