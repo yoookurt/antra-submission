@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -39,6 +42,16 @@
 				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> source1",
 				"source1 derive(genre = flatten(movie.genres)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          movie = movie[1].Id,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          SourceFile,",
+				"          genre",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
