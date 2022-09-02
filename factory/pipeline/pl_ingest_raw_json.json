@@ -30,7 +30,8 @@
 					"dataset": {
 						"referenceName": "ds_movie_raw_json_adls",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -114,6 +115,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"modifiedDatetimeStart": "2022-09-01T00:00:00.834Z",
 						"enablePartitionDiscovery": false
 					},
