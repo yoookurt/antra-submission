@@ -1,6 +1,17 @@
 {
 	"name": "pl_silver_update",
 	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
+				}
+			}
+		],
 		"annotations": []
 	}
 }
