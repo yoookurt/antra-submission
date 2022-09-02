@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "adlscontainer01/movie/raw",
+							"wildcardFolderPath": "/adlscontainer01/movie/raw",
 							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
