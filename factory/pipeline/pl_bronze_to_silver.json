@@ -1,0 +1,41 @@
+{
+	"name": "pl_bronze_to_silver",
+	"properties": {
+		"activities": [
+			{
+				"name": "bronze2silver",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "bronze2silver",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"base_path": "movie/raw"
+							},
+							"sink1": {
+								"bronze_path": "movie/bronze",
+								"bronze": "bronze_table"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}

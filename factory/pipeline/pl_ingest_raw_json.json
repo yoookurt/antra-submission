@@ -1,0 +1,85 @@
+{
+	"name": "pl_ingest_raw_json",
+	"properties": {
+		"activities": [
+			{
+				"name": "ingest2raw",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "adlscontainer01/@{'dataset'}/"
+					},
+					{
+						"name": "Destination",
+						"value": "adlscontainer01/@{'movie/raw'}/"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "dataset",
+							"wildcardFileName": "movie*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_movie_src_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"source_path": "dataset"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_movie_raw_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"base_path": "movie/raw"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"source_path": {
+				"type": "String",
+				"defaultValue": "dataset"
+			}
+		},
+		"variables": {
+			"raw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

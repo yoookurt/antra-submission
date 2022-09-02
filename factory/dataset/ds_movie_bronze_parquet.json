@@ -1,0 +1,33 @@
+{
+	"name": "ds_movie_bronze_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_movie",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"bronze_path": {
+				"type": "string",
+				"defaultValue": "movie/bronze"
+			},
+			"bronze": {
+				"type": "String",
+				"defaultValue": "bronze_table"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().bronze_path",
+					"type": "Expression"
+				},
+				"fileSystem": "adlscontainer01"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
