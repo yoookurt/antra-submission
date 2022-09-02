@@ -56,6 +56,12 @@
 				},
 				{
 					"name": "select5"
+				},
+				{
+					"name": "aggregate2"
+				},
+				{
+					"name": "select6"
 				}
 			],
 			"scriptLines": [
@@ -100,6 +106,15 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select3 aggregate(groupBy(GenreId,",
+				"          GenreName),",
+				"     cnt = count(1)) ~> aggregate2",
+				"aggregate2 select(mapColumn(",
+				"          GenreId,",
+				"          GenreName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -117,7 +132,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1) ~> sink2",
-				"select3 sink(allowSchemaDrift: true,",
+				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
