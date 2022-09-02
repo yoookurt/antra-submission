@@ -15,17 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
@@ -38,16 +27,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "ds_movie_src_json_adls",
-						"type": "DatasetReference",
-						"parameters": {
-							"source_path": "dataset",
-							"source_file": "movie*.json"
-						}
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "ds_movie_raw_json_adls",
