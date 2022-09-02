@@ -8,12 +8,21 @@
 				"basepath": "\"adlscontainer01/movie/\""
 			}
 		},
+		"parameters": {
+			"sourcepath": {
+				"type": "String",
+				"defaultValue": "movie/raw"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "movie/raw",
+				"folderPath": {
+					"value": "@dataset().sourcepath",
+					"type": "Expression"
+				},
 				"fileSystem": "adlscontainer01"
 			}
 		},
