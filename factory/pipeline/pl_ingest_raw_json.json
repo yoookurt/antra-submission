@@ -51,7 +51,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_movie_src_json_adls",
+						"referenceName": "ds_movie_src_json",
 						"type": "DatasetReference",
 						"parameters": {
 							"source_path": "dataset"
@@ -60,7 +60,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_movie_raw_json_adls",
+						"referenceName": "ds_movie_raw_json",
 						"type": "DatasetReference",
 						"parameters": {
 							"base_path": "movie/raw"
