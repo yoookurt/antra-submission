@@ -13,7 +13,29 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "adlscontainer01/movie/raw",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_movie_raw_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"base_path": "movie/raw"
+						}
+					}
+				}
 			},
 			{
 				"name": "Get Metadata1",
