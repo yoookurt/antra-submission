@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
-				"type": "Lookup",
+				"name": "raw2bronze",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,118 +15,24 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"dataset": {
-						"referenceName": "ds_movie_raw_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_path": "movie/raw"
-						}
-					},
-					"firstRowOnly": false
-				}
-			},
-			{
-				"name": "Get Metadata1",
-				"type": "GetMetadata",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_movie_raw_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_path": "movie/raw"
-						}
-					},
-					"fieldList": [
-						"lastModified"
-					],
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"enablePartitionDiscovery": false
-					},
-					"formatSettings": {
-						"type": "JsonReadSettings"
-					}
-				}
-			},
-			{
-				"name": "ForEach1",
-				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Lookup1').output.value",
-						"type": "Expression"
-					},
-					"activities": [
-						{
-							"name": "raw2bronze",
-							"type": "ExecuteDataFlow",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
+					"dataflow": {
+						"referenceName": "raw2bronze",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"base_path": "movie/raw"
 							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataflow": {
-									"referenceName": "raw2bronze",
-									"type": "DataFlowReference",
-									"datasetParameters": {
-										"source1": {
-											"base_path": "movie/raw"
-										},
-										"sink1": {
-											"bronze_path": "bronze"
-										}
-									}
-								},
-								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
-								},
-								"traceLevel": "Fine",
-								"runConcurrently": true
+							"sink1": {
+								"bronze_path": "movie/bronze",
+								"bronze": "bronze_table"
 							}
 						}
-					]
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
