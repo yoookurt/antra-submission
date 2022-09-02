@@ -47,6 +47,9 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -79,6 +82,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select3 aggregate() ~> aggregate1",
 				"select4 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
@@ -96,7 +100,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1) ~> sink2",
-				"select3 sink(allowSchemaDrift: false,",
+				"aggregate1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
