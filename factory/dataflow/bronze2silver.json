@@ -97,6 +97,12 @@
 				},
 				{
 					"name": "alterRow1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -245,7 +251,13 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select10",
-				"bronze alterRow(upsertIf(Status == \"quarantine\")) ~> alterRow1",
+				"bronze alterRow(upsertIf(derivedColumn1.Status == \"quarantine\")) ~> alterRow1",
+				"alterRow1 derive() ~> derivedColumn2",
+				"derivedColumn2, derivedColumn1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -279,7 +291,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> movie",
-				"alterRow1 sink(allowSchemaDrift: true,",
+				"join1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
