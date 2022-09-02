@@ -33,6 +33,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_movie_silver_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
 				}
 			],
 			"transformations": [
@@ -204,7 +211,15 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink3"
+				"     skipDuplicateMapOutputs: true) ~> sink3",
+				"select8 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink4"
 			]
 		}
 	}
