@@ -62,7 +62,7 @@
 						"referenceName": "ds_movie_raw_json_adls",
 						"type": "DatasetReference",
 						"parameters": {
-							"base_path": "movie"
+							"base_path": "movie/raw"
 						}
 					}
 				]
