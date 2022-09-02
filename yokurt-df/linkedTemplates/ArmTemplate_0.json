@@ -1,0 +1,1104 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "yokurt-df"
+		},
+		"adls_movie_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_movie'"
+		},
+		"adls_movie_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://antrastrg01adls.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_silver_update')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 5
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_unittest')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "var",
+							"value": "hello world"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"var": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_movie')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adls_movie_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('adls_movie_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_genre_silver_parquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"silver_path": {
+						"type": "string",
+						"defaultValue": "movie/silver"
+					},
+					"genre": {
+						"type": "String",
+						"defaultValue": "genre"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@{dataset().silver_path}/{dataset().genre}",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_language_silver_parquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"silver_path": {
+						"type": "string",
+						"defaultValue": "movie/silver"
+					},
+					"language": {
+						"type": "String",
+						"defaultValue": "language"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@{dataset().silver_path}/{dataset().language}",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_movie_bronze_parquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"bronze_path": {
+						"type": "string",
+						"defaultValue": "movie/bronze"
+					},
+					"bronze": {
+						"type": "String",
+						"defaultValue": "bronze_table"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().bronze_path",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_movie_genre_junction_silver_parquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"silver_path": {
+						"type": "string",
+						"defaultValue": "movie/silver"
+					},
+					"movie_genre_junction": {
+						"type": "String",
+						"defaultValue": "movie_genre_junction"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@{dataset().silver_path}/{dataset().movie_genre_junction}",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_movie_raw_json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"base_path": {
+						"type": "String",
+						"defaultValue": "movie/raw"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().base_path",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"movie": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"Id": {
+										"type": "integer"
+									},
+									"Title": {
+										"type": "string"
+									},
+									"Overview": {
+										"type": "string"
+									},
+									"Tagline": {
+										"type": "string"
+									},
+									"Budget": {
+										"type": "number"
+									},
+									"Revenue": {
+										"type": "number"
+									},
+									"ImdbUrl": {
+										"type": "string"
+									},
+									"TmdbUrl": {
+										"type": "string"
+									},
+									"PosterUrl": {
+										"type": "string"
+									},
+									"BackdropUrl": {
+										"type": "string"
+									},
+									"OriginalLanguage": {
+										"type": "string"
+									},
+									"ReleaseDate": {
+										"type": "string"
+									},
+									"RunTime": {
+										"type": "integer"
+									},
+									"Price": {
+										"type": "number"
+									},
+									"CreatedDate": {
+										"type": "string"
+									},
+									"UpdatedDate": {
+										"type": "null"
+									},
+									"UpdatedBy": {
+										"type": "null"
+									},
+									"CreatedBy": {
+										"type": "null"
+									},
+									"genres": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "integer"
+												},
+												"name": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_movie_silver_parquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"silver_path": {
+						"type": "string",
+						"defaultValue": "movie/silver"
+					},
+					"movie": {
+						"type": "String",
+						"defaultValue": "movie"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@{dataset().silver_path}/{dataset().movie}",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_movie_src_json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adls_movie",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"source_path": {
+						"type": "String",
+						"defaultValue": "dataset"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().source_path",
+							"type": "Expression"
+						},
+						"fileSystem": "adlscontainer01"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"movie": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"Id": {
+										"type": "integer"
+									},
+									"Title": {
+										"type": "string"
+									},
+									"Overview": {
+										"type": "string"
+									},
+									"Tagline": {
+										"type": "string"
+									},
+									"Budget": {
+										"type": "number"
+									},
+									"Revenue": {
+										"type": "number"
+									},
+									"ImdbUrl": {
+										"type": "string"
+									},
+									"TmdbUrl": {
+										"type": "string"
+									},
+									"PosterUrl": {
+										"type": "string"
+									},
+									"BackdropUrl": {
+										"type": "string"
+									},
+									"OriginalLanguage": {
+										"type": "string"
+									},
+									"ReleaseDate": {
+										"type": "string"
+									},
+									"RunTime": {
+										"type": "integer"
+									},
+									"Price": {
+										"type": "number"
+									},
+									"CreatedDate": {
+										"type": "string"
+									},
+									"UpdatedDate": {
+										"type": "null"
+									},
+									"UpdatedBy": {
+										"type": "null"
+									},
+									"CreatedBy": {
+										"type": "null"
+									},
+									"genres": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "integer"
+												},
+												"name": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adls_movie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_ingest_raw_json')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest2raw",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "adlscontainer01/@{'dataset'}/"
+							},
+							{
+								"name": "Destination",
+								"value": "adlscontainer01/@{'movie/raw'}/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "dataset",
+									"wildcardFileName": "movie*.json",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "setOfObjects"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_movie_src_json",
+								"type": "DatasetReference",
+								"parameters": {
+									"source_path": "dataset"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_movie_raw_json",
+								"type": "DatasetReference",
+								"parameters": {
+									"base_path": "movie/raw"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"source_path": {
+						"type": "String",
+						"defaultValue": "dataset"
+					}
+				},
+				"variables": {
+					"raw_path": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_movie_src_json')]",
+				"[concat(variables('factoryId'), '/datasets/ds_movie_raw_json')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bronze2silver')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ds_movie_bronze_parquet",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ds_language_silver_parquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_movie_genre_junction_silver_parquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_genre_silver_parquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink3"
+						}
+					],
+					"transformations": [
+						{
+							"name": "select1"
+						},
+						{
+							"name": "select3"
+						},
+						{
+							"name": "select4"
+						},
+						{
+							"name": "aggregate1"
+						},
+						{
+							"name": "window1"
+						},
+						{
+							"name": "select5"
+						},
+						{
+							"name": "aggregate2"
+						},
+						{
+							"name": "select6"
+						},
+						{
+							"name": "lookup1"
+						},
+						{
+							"name": "select7"
+						},
+						{
+							"name": "select8"
+						},
+						{
+							"name": "split1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[],",
+						"          IngestTime as timestamp,",
+						"          p_IngestDate as date,",
+						"          Status as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     inferDriftedColumnTypes: true,",
+						"     limit: 100,",
+						"     ignoreNoFilesFound: false,",
+						"     rowUrlColumn: 'SourceFile',",
+						"     format: 'parquet') ~> source1",
+						"source1 select(mapColumn(",
+						"          MovieId = movie[1].Id,",
+						"          GenreId = movie[1].genres[1].id",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"source1 select(mapColumn(",
+						"          GenreId = movie[1].genres[1].id,",
+						"          GenreName = movie[1].genres[1].name",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select3",
+						"source1 select(mapColumn(",
+						"          Language = movie[1].OriginalLanguage",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select4",
+						"select4 aggregate(groupBy(Language),",
+						"     cnt = count(Language)) ~> aggregate1",
+						"select5 window(over(Language),",
+						"     asc(Language, true),",
+						"     LangId = rank()) ~> window1",
+						"aggregate1 select(mapColumn(",
+						"          Language",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select5",
+						"select3 aggregate(groupBy(GenreId,",
+						"          GenreName),",
+						"     cnt = count(1)) ~> aggregate2",
+						"aggregate2 select(mapColumn(",
+						"          GenreId,",
+						"          GenreName",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select6",
+						"select7, window1 lookup(select7@Language == select5@Language,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"source1 select(mapColumn(",
+						"          movie,",
+						"          MovieId = movie[1].Id,",
+						"          BackdropUrl = movie[1].BackdropUrl,",
+						"          Budget = movie[1].Budget,",
+						"          CreatedBy = movie[1].CreatedBy,",
+						"          CreatedDate = movie[1].CreatedDate,",
+						"          ImdbUrl = movie[1].ImdbUrl,",
+						"          Language = movie[1].OriginalLanguage,",
+						"          Overview = movie[1].Overview,",
+						"          PosterUrl = movie[1].PosterUrl,",
+						"          Price = movie[1].Price,",
+						"          ReleaseDate = movie[1].ReleaseDate,",
+						"          Revenue = movie[1].Revenue,",
+						"          RunTime = movie[1].RunTime,",
+						"          Tagline = movie[1].Tagline,",
+						"          Title = movie[1].Title,",
+						"          TmdbUrl = movie[1].TmdbUrl,",
+						"          UpdatedBy = movie[1].UpdatedBy,",
+						"          UpdatedDate = movie[1].UpdatedDate,",
+						"          GenreId = movie[1].genres[1].id,",
+						"          IngestTime,",
+						"          p_IngestDate,",
+						"          Status,",
+						"          SourceFile",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select7",
+						"lookup1 select(mapColumn(",
+						"          movie,",
+						"          MovieId,",
+						"          BackdropUrl,",
+						"          Budget,",
+						"          CreatedBy,",
+						"          CreatedDate,",
+						"          ImdbUrl,",
+						"          Overview,",
+						"          PosterUrl,",
+						"          Price,",
+						"          ReleaseDate,",
+						"          Revenue,",
+						"          RunTime,",
+						"          Tagline,",
+						"          Title,",
+						"          TmdbUrl,",
+						"          UpdatedBy,",
+						"          UpdatedDate,",
+						"          GenreId,",
+						"          IngestTime,",
+						"          p_IngestDate,",
+						"          Status,",
+						"          SourceFile,",
+						"          LangId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select8",
+						"select8 split(or(lesserOrEqual(RunTime, 0), or((lesser(Budget, 1000000)), (isNull(movie.genres.name)))),",
+						"     disjoint: true) ~> split1@(quarantine, clean)",
+						"window1 sink(allowSchemaDrift: true,",
+						"     validateSchema: true,",
+						"     format: 'parquet',",
+						"     umask: 0622,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1",
+						"select1 sink(allowSchemaDrift: true,",
+						"     validateSchema: true,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 0) ~> sink2",
+						"select6 sink(allowSchemaDrift: true,",
+						"     validateSchema: true,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink3"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_movie_bronze_parquet')]",
+				"[concat(variables('factoryId'), '/datasets/ds_language_silver_parquet')]",
+				"[concat(variables('factoryId'), '/datasets/ds_movie_genre_junction_silver_parquet')]",
+				"[concat(variables('factoryId'), '/datasets/ds_genre_silver_parquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/raw2bronze')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ds_movie_raw_json",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ds_movie_bronze_parquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "derivedColumn1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[]",
+						"     ),",
+						"     allowSchemaDrift: false,",
+						"     validateSchema: true,",
+						"     ignoreNoFilesFound: false,",
+						"     rowUrlColumn: 'SourceFile',",
+						"     documentForm: 'documentPerLine') ~> source1",
+						"source1 derive(IngestTime = currentTimestamp(),",
+						"          p_IngestDate = currentDate(),",
+						"          Status = \"new\") ~> derivedColumn1",
+						"derivedColumn1 sink(allowSchemaDrift: true,",
+						"     validateSchema: true,",
+						"     format: 'parquet',",
+						"     umask: 0622,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_movie_raw_json')]",
+				"[concat(variables('factoryId'), '/datasets/ds_movie_bronze_parquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_bronze_to_silver')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "bronze2silver",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "bronze2silver",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {
+										"bronze_path": "movie/bronze",
+										"bronze": "bronze_table"
+									},
+									"sink1": {
+										"silver_path": "movie/silver",
+										"language": "language"
+									},
+									"sink2": {
+										"silver_path": "movie/silver",
+										"movie_genre_junction": "movie_genre_junction"
+									},
+									"sink3": {
+										"silver_path": "movie/silver",
+										"genre": "genre"
+									}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/bronze2silver')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_raw_to_bronze')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "raw2bronze",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "raw2bronze",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {
+										"base_path": "movie/raw"
+									},
+									"sink1": {
+										"bronze_path": "movie/bronze",
+										"bronze": "bronze_table"
+									}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"raw_path": {
+						"type": "String",
+						"defaultValue": "raw"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/raw2bronze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_movie_ELT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "pl_ingest_raw_json",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_ingest_raw_json",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "pl_raw_to_bronze",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "pl_ingest_raw_json",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_raw_to_bronze",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "pl_bronze_to_silver",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "pl_raw_to_bronze",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_bronze_to_silver",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "pl_silver_update",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "pl_bronze_to_silver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_silver_update",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_ingest_raw_json')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_raw_to_bronze')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_bronze_to_silver')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_silver_update')]"
+			]
+		}
+	]
+}
