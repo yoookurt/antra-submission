@@ -43,18 +43,17 @@
 						"referenceName": "ds_movie_src_json_adls",
 						"type": "DatasetReference",
 						"parameters": {
-							"sourcepath": "movie/raw",
+							"source_path": "dataset",
 							"source_file": "movie*.json"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_movie_src_json_adls",
+						"referenceName": "ds_movie_raw_json_adls",
 						"type": "DatasetReference",
 						"parameters": {
-							"sourcepath": "movie/raw",
-							"source_file": "movie*.json"
+							"base_path": "movie/raw"
 						}
 					}
 				]
