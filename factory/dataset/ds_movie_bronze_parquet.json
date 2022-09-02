@@ -8,7 +8,7 @@
 		"parameters": {
 			"bronze_path": {
 				"type": "string",
-				"defaultValue": "bronze"
+				"defaultValue": "movie/bronze"
 			},
 			"bronze": {
 				"type": "String",
