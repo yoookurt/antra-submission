@@ -9,7 +9,7 @@
 			}
 		},
 		"parameters": {
-			"sourcepath": {
+			"source_path": {
 				"type": "String",
 				"defaultValue": "movie/raw"
 			},
@@ -28,7 +28,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().sourcepath",
+					"value": "@dataset().source_path",
 					"type": "Expression"
 				},
 				"fileSystem": "adlscontainer01"
