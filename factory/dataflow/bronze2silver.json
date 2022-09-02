@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_movie_bronze_parquet",
+						"referenceName": "ds_language_silver_parquet",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -44,6 +44,9 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -71,8 +74,18 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
-				"     validateSchema: true,",
+				"derivedColumn1 select(mapColumn(",
+				"          movie,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          SourceFile,",
+				"          genre",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
 				"     preCommands: [],",
@@ -89,7 +102,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1) ~> sink2",
 				"select3 sink(allowSchemaDrift: false,",
-				"     validateSchema: true,",
+				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
