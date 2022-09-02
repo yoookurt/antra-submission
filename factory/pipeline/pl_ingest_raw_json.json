@@ -20,8 +20,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "dataset",
-							"wildcardFileName": "movie*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -45,7 +43,8 @@
 						"referenceName": "ds_movie_src_json_adls",
 						"type": "DatasetReference",
 						"parameters": {
-							"sourcepath": "movie/raw"
+							"sourcepath": "movie/raw",
+							"source_file": "movie*.json"
 						}
 					}
 				],
