@@ -13,22 +13,17 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "MapDrifted1",
-					"description": "Creates an explicit mapping for each drifted column"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[]",
 				"     ),",
-				"     allowSchemaDrift: true,",
+				"     allowSchemaDrift: false,",
 				"     validateSchema: true,",
+				"     limit: 20,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
-				"     documentForm: 'documentPerLine') ~> source1",
-				"source1 derive(movie = toArray(byName('movie'))) ~> MapDrifted1"
+				"     documentForm: 'documentPerLine') ~> source1"
 			]
 		}
 	}
