@@ -13,33 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
-							"modifiedDatetimeStart": "2022-09-02T00:00:00.876Z",
-							"wildcardFolderPath": {
-								"value": "adlscontainer01/@pipeline().parameters.raw_path",
-								"type": "Expression"
-							},
-							"wildcardFileName": "*.json",
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"dataset": {
-						"referenceName": "ds_movie_raw_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_path": "movie/raw"
-						}
-					}
-				}
+				"userProperties": []
 			},
 			{
 				"name": "Get Metadata1",
