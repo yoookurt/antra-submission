@@ -17,6 +17,7 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: true,",
+				"     limit: 100,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
 				"     documentForm: 'documentPerLine') ~> source1"
