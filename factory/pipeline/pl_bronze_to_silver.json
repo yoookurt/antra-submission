@@ -17,16 +17,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "bronze2silver",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"source1": {
-								"base_path": "movie/raw"
-							},
-							"sink1": {
-								"bronze_path": "movie/bronze",
-								"bronze": "bronze_table"
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
