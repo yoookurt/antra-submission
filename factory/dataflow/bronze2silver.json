@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -43,15 +46,12 @@
 				"     format: 'parquet') ~> source1",
 				"source1 derive(genre = flatten(movie.genres)) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
-				"          movie = movie[1].Id,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          SourceFile,",
-				"          genre",
+				"          MovieId = movie[1].Id,",
+				"          GenreId = movie[1].genres[1].id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate() ~> aggregate1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
