@@ -85,7 +85,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
 				"select4 aggregate(groupBy(Language),",
-				"     Language = first(Language),",
+				"     fLanguage = first(Language),",
 				"          cnt = count(Language)) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
