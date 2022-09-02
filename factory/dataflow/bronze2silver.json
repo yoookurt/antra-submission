@@ -139,6 +139,7 @@
 				"          Title = movie[1].Title,",
 				"          TmdbUrl = movie[1].TmdbUrl,",
 				"          UpdatedBy = movie[1].UpdatedBy,",
+				"          UpdatedDate = movie[1].UpdatedDate,",
 				"          GenreId = movie[1].genres[1].id,",
 				"          IngestTime,",
 				"          p_IngestDate,",
