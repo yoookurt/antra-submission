@@ -16,11 +16,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "adlscontainer01/@{'dataset'}/@{'movie*.json'}"
+						"value": "adlscontainer01/@{'dataset'}/"
 					},
 					{
 						"name": "Destination",
-						"value": "adlscontainer01/@{'movie'}/"
+						"value": "adlscontainer01/@{'movie/raw'}/"
 					}
 				],
 				"typeProperties": {
