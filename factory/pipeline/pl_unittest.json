@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup2",
-				"type": "Lookup",
+				"name": "raw2bronze",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,27 +15,25 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
-							"wildcardFolderPath": "adlscontainer01/movie/raw",
-							"wildcardFileName": "*",
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
+					"dataflow": {
+						"referenceName": "raw2bronze",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"base_path": "movie/raw"
+							},
+							"sink1": {
+								"bronze_path": "bronze",
+								"bronze": "bronze_table"
+							}
 						}
 					},
-					"dataset": {
-						"referenceName": "ds_movie_src_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"source_path": "dataset"
-						}
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
-					"firstRowOnly": false
+					"traceLevel": "Fine",
+					"runConcurrently": true
 				}
 			}
 		],
