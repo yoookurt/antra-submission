@@ -28,9 +28,28 @@
 							"type": "JsonReadSettings"
 						}
 					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
+					{
+						"referenceName": "ds_movie_raw_json_adls",
+						"type": "DatasetReference",
+						"parameters": {
+							"silverpath": "silver"
+						}
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "ds_movie_raw_json_adls",
 						"type": "DatasetReference"
