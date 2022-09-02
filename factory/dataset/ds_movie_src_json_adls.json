@@ -1,5 +1,5 @@
 {
-	"name": "ds_movie_raw_json_adls",
+	"name": "ds_movie_src_json_adls",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",

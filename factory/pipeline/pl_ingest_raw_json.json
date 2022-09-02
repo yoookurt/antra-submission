@@ -42,17 +42,21 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_movie_raw_json_adls",
+						"referenceName": "ds_movie_src_json_adls",
 						"type": "DatasetReference",
 						"parameters": {
-							"silverpath": "silver"
+							"sourcepath": "movie/raw"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_movie_raw_json_adls",
-						"type": "DatasetReference"
+						"referenceName": "ds_movie_src_json_adls",
+						"type": "DatasetReference",
+						"parameters": {
+							"sourcepath": "movie/raw",
+							"source_file": "movie*.json"
+						}
 					}
 				]
 			}
