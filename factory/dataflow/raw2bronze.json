@@ -9,7 +9,7 @@
 						"referenceName": "ds_movie_raw_json",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "raw"
 				}
 			],
 			"sinks": [
@@ -18,12 +18,12 @@
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "bronze"
 				}
 			],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
+					"name": "addMetadata"
 				}
 			],
 			"scriptLines": [
@@ -34,18 +34,18 @@
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
-				"     documentForm: 'documentPerLine') ~> source1",
-				"source1 derive(IngestTime = currentTimestamp(),",
+				"     documentForm: 'documentPerLine') ~> raw",
+				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
-				"          Status = \"new\") ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"          Status = \"new\") ~> addMetadata",
+				"addMetadata sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> bronze"
 			]
 		}
 	}
