@@ -18,6 +18,7 @@
 				"source(allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
+				"     rowUrlColumn: 'SourceFile',",
 				"     documentForm: 'documentPerLine') ~> source1"
 			]
 		}
