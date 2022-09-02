@@ -5,7 +5,17 @@
 			"referenceName": "adls_movie",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"basepath": "\"adlscontainer01/dataset/\""
+				"basepath": "\"adlscontainer01/movie/\""
+			}
+		},
+		"parameters": {
+			"rawpath": {
+				"type": "string",
+				"defaultValue": "raw"
+			},
+			"silverpath": {
+				"type": "string",
+				"defaultValue": "silver"
 			}
 		},
 		"annotations": [],
@@ -13,7 +23,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "dataset",
+				"folderPath": "movie/raw",
 				"fileSystem": "adlscontainer01"
 			}
 		},
