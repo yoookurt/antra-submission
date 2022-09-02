@@ -117,7 +117,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select7, window1 lookup(MovieId == ERROR_FUNCTION(''),",
+				"select7, window1 lookup(Language == Language,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
