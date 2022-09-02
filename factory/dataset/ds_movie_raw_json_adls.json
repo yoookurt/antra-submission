@@ -1,0 +1,20 @@
+{
+	"name": "ds_movie_raw_json_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_movie",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"basepath": "dataset"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			}
+		},
+		"schema": {}
+	}
+}
