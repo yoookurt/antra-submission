@@ -9,10 +9,6 @@
 			"source_path": {
 				"type": "String",
 				"defaultValue": "dataset"
-			},
-			"source_file": {
-				"type": "String",
-				"defaultValue": "movie_0.json"
 			}
 		},
 		"annotations": [],
