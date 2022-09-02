@@ -3,10 +3,7 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"basepath": "\"adlscontainer01/movie/\""
-			}
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"source_path": {
