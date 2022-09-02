@@ -20,10 +20,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "{@dataset().silver}.parquet",
-					"type": "Expression"
-				},
 				"folderPath": {
 					"value": "@dataset().silver_path",
 					"type": "Expression"
