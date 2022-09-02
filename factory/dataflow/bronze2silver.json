@@ -18,35 +18,35 @@
 						"referenceName": "ds_language_silver_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "language"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_movie_genre_junction_silver_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink2"
+					"name": "MovieGenreJunction"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_genre_silver_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink3"
+					"name": "genre"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_movie_silver_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink4"
+					"name": "movie"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sink5"
+					"name": "bronzeStatus"
 				}
 			],
 			"transformations": [
@@ -253,7 +253,7 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"     skipDuplicateMapOutputs: true) ~> language",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -262,7 +262,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 0) ~> sink2",
+				"     saveOrder: 0) ~> MovieGenreJunction",
 				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -270,7 +270,7 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink3",
+				"     skipDuplicateMapOutputs: true) ~> genre",
 				"select10 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -278,7 +278,7 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink4",
+				"     skipDuplicateMapOutputs: true) ~> movie",
 				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
@@ -286,7 +286,7 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink5"
+				"     skipDuplicateMapOutputs: true) ~> bronzeStatus"
 			]
 		}
 	}
