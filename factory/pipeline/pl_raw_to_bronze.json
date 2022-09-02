@@ -92,7 +92,7 @@
 					},
 					"activities": [
 						{
-							"name": "dataflow1",
+							"name": "raw2bronze",
 							"type": "ExecuteDataFlow",
 							"dependsOn": [],
 							"policy": {
@@ -105,11 +105,14 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataflow": {
-									"referenceName": "dataflow1",
+									"referenceName": "raw2bronze",
 									"type": "DataFlowReference",
 									"datasetParameters": {
 										"source1": {
-											"source_path": "dataset"
+											"base_path": "movie/raw"
+										},
+										"sink1": {
+											"bronze_path": "bronze"
 										}
 									}
 								},
@@ -117,7 +120,8 @@
 									"coreCount": 8,
 									"computeType": "General"
 								},
-								"traceLevel": "Fine"
+								"traceLevel": "Fine",
+								"runConcurrently": true
 							}
 						}
 					]
