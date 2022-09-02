@@ -21,7 +21,7 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": {
-								"value": "@pipeline().parameters.raw_path",
+								"value": "adlscontainer01/@pipeline().parameters.raw_path",
 								"type": "Expression"
 							},
 							"wildcardFileName": "*.json",
