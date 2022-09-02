@@ -62,6 +62,12 @@
 				},
 				{
 					"name": "select6"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "select7"
 				}
 			],
 			"scriptLines": [
@@ -115,6 +121,21 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select7, window1 lookup(MovieId == ERROR_FUNCTION(''),",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"derivedColumn1 select(mapColumn(",
+				"          MovieId = movie[1].Id,",
+				"          BackdropUrl = movie[1].BackdropUrl,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          SourceFile,",
+				"          GenreId = movie[1].genres[1].id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select7",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
