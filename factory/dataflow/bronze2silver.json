@@ -33,6 +33,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_movie_silver_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
 				}
 			],
 			"transformations": [
@@ -77,6 +84,12 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "select10"
 				}
 			],
 			"scriptLines": [
@@ -199,6 +212,33 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select9",
 				"select9 derive(Status = \"quarantine\") ~> derivedColumn1",
+				"derivedColumn1 alterRow() ~> alterRow1",
+				"split1@clean select(mapColumn(",
+				"          MovieId,",
+				"          BackdropUrl,",
+				"          Budget,",
+				"          CreatedBy,",
+				"          CreatedDate,",
+				"          ImdbUrl,",
+				"          Overview,",
+				"          PosterUrl,",
+				"          Price,",
+				"          ReleaseDate,",
+				"          Revenue,",
+				"          RunTime,",
+				"          Tagline,",
+				"          Title,",
+				"          TmdbUrl,",
+				"          UpdatedBy,",
+				"          UpdatedDate,",
+				"          GenreId,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          SourceFile,",
+				"          LangId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select10",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -223,7 +263,15 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink3"
+				"     skipDuplicateMapOutputs: true) ~> sink3",
+				"select10 sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     format: 'parquet',",
+				"     umask: 0622,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink4"
 			]
 		}
 	}
