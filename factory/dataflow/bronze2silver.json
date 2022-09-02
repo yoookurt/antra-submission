@@ -71,6 +71,12 @@
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "select9"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -83,7 +89,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     limit: 100,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> source1",
@@ -128,7 +133,7 @@
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
 				"source1 select(mapColumn(",
-				"          movie = movie,",
+				"          movie,",
 				"          MovieId = movie[1].Id,",
 				"          BackdropUrl = movie[1].BackdropUrl,",
 				"          Budget = movie[1].Budget,",
@@ -156,7 +161,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
 				"lookup1 select(mapColumn(",
-				"          movie = movie,",
+				"          movie,",
 				"          MovieId,",
 				"          BackdropUrl,",
 				"          Budget,",
@@ -185,6 +190,15 @@
 				"     skipDuplicateMapOutputs: true) ~> select8",
 				"select8 split(or(lesserOrEqual(RunTime, 0), or((lesser(Budget, 1000000)), (isNull(movie.genres.name)))),",
 				"     disjoint: true) ~> split1@(quarantine, clean)",
+				"split1@quarantine select(mapColumn(",
+				"          movie = movie,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          SourceFile",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select9",
+				"select9 derive(Status = \"quarantine\") ~> derivedColumn1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
