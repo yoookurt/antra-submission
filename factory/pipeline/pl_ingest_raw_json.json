@@ -13,7 +13,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "adlscontainer01/@{'dataset'}/@{'movie*.json'}"
+					},
+					{
+						"name": "Destination",
+						"value": "adlscontainer01/@{'movie'}/"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
