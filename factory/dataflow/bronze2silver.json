@@ -33,13 +33,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink3"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_movie_silver_parquet",
-						"type": "DatasetReference"
-					},
-					"name": "sink4"
 				}
 			],
 			"transformations": [
@@ -75,6 +68,9 @@
 				},
 				{
 					"name": "select8"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -187,6 +183,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select8",
+				"select8 split(or(lesserOrEqual(RunTime, 0), or((lesser(Budget, 1000000)), (isNull(movie.genres.name)))),",
+				"     disjoint: true) ~> split1@(quarantine, clean)",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -203,7 +201,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1) ~> sink2",
+				"     saveOrder: 0) ~> sink2",
 				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -211,15 +209,7 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink3",
-				"select8 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'parquet',",
-				"     umask: 0022,",
-				"     preCommands: [],",
-				"     postCommands: [],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink4"
+				"     skipDuplicateMapOutputs: true) ~> sink3"
 			]
 		}
 	}
