@@ -21,7 +21,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().silver",
+					"value": "{@dataset().silver}.parquet",
 					"type": "Expression"
 				},
 				"folderPath": {
