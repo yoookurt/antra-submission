@@ -53,6 +53,9 @@
 				},
 				{
 					"name": "window1"
+				},
+				{
+					"name": "select5"
 				}
 			],
 			"scriptLines": [
@@ -89,9 +92,14 @@
 				"     skipDuplicateMapOutputs: true) ~> select4",
 				"select4 aggregate(groupBy(Language),",
 				"     cnt = count(Language)) ~> aggregate1",
-				"aggregate1 window(over(Language),",
+				"select5 window(over(Language),",
 				"     asc(Language, true),",
 				"     LangId = rank()) ~> window1",
+				"aggregate1 select(mapColumn(",
+				"          Language",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
