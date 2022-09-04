@@ -1,5 +1,5 @@
 {
-	"name": "bronze2silver",
+	"name": "df_bronze2silver",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -47,6 +47,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "bronzeStatus"
+				},
+				{
+					"name": "cache1"
 				}
 			],
 			"transformations": [
@@ -217,7 +220,7 @@
 				"select8 split(or(lesserOrEqual(RunTime, 0), or((lesser(Budget, 1000000)), (isNull(movie.genres.name)))),",
 				"     disjoint: true) ~> split1@(quarantine, clean)",
 				"split1@quarantine select(mapColumn(",
-				"          movie = movie,",
+				"          movie,",
 				"          IngestTime,",
 				"          p_IngestDate,",
 				"          SourceFile",
@@ -251,7 +254,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select10",
-				"bronze alterRow(upsertIf(derivedColumn1.Status == \"quarantine\")) ~> alterRow1",
+				"bronze alterRow(upsertIf(derivedColumn1.Status==\"quarantine\")) ~> alterRow1",
 				"alterRow1 derive() ~> derivedColumn2",
 				"derivedColumn2, derivedColumn1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
 				"     joinType:'inner',",
@@ -298,7 +301,14 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> bronzeStatus"
+				"     skipDuplicateMapOutputs: true) ~> bronzeStatus",
+				"derivedColumn1 sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> cache1"
 			]
 		}
 	}
