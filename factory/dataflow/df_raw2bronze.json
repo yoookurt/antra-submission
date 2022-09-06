@@ -1,5 +1,5 @@
 {
-	"name": "raw2bronze",
+	"name": "df_raw2bronze",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
