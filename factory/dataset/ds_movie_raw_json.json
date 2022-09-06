@@ -16,7 +16,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "movie_0.json",
+				"fileName": "movie_sample.json",
 				"folderPath": {
 					"value": "@dataset().base_path",
 					"type": "Expression"
