@@ -109,9 +109,6 @@
 				},
 				{
 					"name": "union1"
-				},
-				{
-					"name": "parse1"
 				}
 			],
 			"scriptLines": [
@@ -122,7 +119,7 @@
 				"          p_IngestDate as date,",
 				"          Status as string",
 				"     ),",
-				"     allowSchemaDrift: true,",
+				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> bronze",
@@ -166,7 +163,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
-				"parse1 select(mapColumn(",
+				"bronze select(mapColumn(",
 				"          movie,",
 				"          MovieId = movie[1].Id,",
 				"          BackdropUrl = movie[1].BackdropUrl,",
@@ -258,9 +255,6 @@
 				"     skipDuplicateMapOutputs: true) ~> select12",
 				"select12 derive(Status = \"clean\") ~> derivedColumn3",
 				"derivedColumn1, derivedColumn3 union(byName: true)~> union1",
-				"bronze parse(movie = ERROR_FUNCTION(''),",
-				"     format: 'json',",
-				"     documentForm: 'documentPerLine') ~> parse1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
