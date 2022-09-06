@@ -96,16 +96,19 @@
 					"name": "derivedColumn1"
 				},
 				{
-					"name": "select10"
-				},
-				{
-					"name": "alterRow1"
-				},
-				{
-					"name": "derivedColumn2"
-				},
-				{
 					"name": "join1"
+				},
+				{
+					"name": "select11"
+				},
+				{
+					"name": "select12"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -228,39 +231,31 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select9",
 				"select9 derive(Status = \"quarantine\") ~> derivedColumn1",
-				"split1@clean select(mapColumn(",
-				"          MovieId,",
-				"          BackdropUrl,",
-				"          Budget,",
-				"          CreatedBy,",
-				"          CreatedDate,",
-				"          ImdbUrl,",
-				"          Overview,",
-				"          PosterUrl,",
-				"          Price,",
-				"          ReleaseDate,",
-				"          Revenue,",
-				"          RunTime,",
-				"          Tagline,",
-				"          Title,",
-				"          TmdbUrl,",
-				"          UpdatedBy,",
-				"          UpdatedDate,",
-				"          GenreId,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          SourceFile,",
-				"          LangId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select10",
-				"bronze alterRow(upsertIf(derivedColumn1.Status==\"quarantine\")) ~> alterRow1",
-				"alterRow1 derive() ~> derivedColumn2",
-				"derivedColumn2, derivedColumn1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"bronze, union1 join(bronze@movie == union1@movie",
+				"     && bronze@p_IngestDate == union1@p_IngestDate,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          movie = bronze@movie,",
+				"          IngestTime = bronze@IngestTime,",
+				"          p_IngestDate = bronze@p_IngestDate,",
+				"          SourceFile = bronze@SourceFile,",
+				"          Status = union1@Status",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select11",
+				"split1@clean select(mapColumn(",
+				"          movie = movie,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          SourceFile",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select12",
+				"select12 derive(Status = \"clean\") ~> derivedColumn3",
+				"derivedColumn1, derivedColumn3 union(byName: true)~> union1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -286,7 +281,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> genre",
-				"select10 sink(allowSchemaDrift: true,",
+				"split1@clean sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
@@ -294,7 +289,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> movie",
-				"join1 sink(allowSchemaDrift: true,",
+				"select11 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
@@ -302,7 +297,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> bronzeStatus",
-				"derivedColumn1 sink(validateSchema: false,",
+				"union1 sink(validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     store: 'cache',",
