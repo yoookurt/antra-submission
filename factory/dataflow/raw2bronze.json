@@ -24,11 +24,17 @@
 			"transformations": [
 				{
 					"name": "addMetadata"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as string",
+				"          movie as string[]",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: true,",
@@ -38,8 +44,26 @@
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata sink(allowSchemaDrift: true,",
+				"flatten1 derive(value = ERROR_FUNCTION('')) ~> derivedColumn1",
+				"addMetadata foldDown(unroll(movie, movie),",
+				"     mapColumn(",
+				"          movie,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
+				"     input(",
+				"          movie as string,",
+				"          SourceFile as string,",
+				"          IngestTime as timestamp,",
+				"          p_IngestDate as date,",
+				"          Status as string",
+				"     ),",
 				"     format: 'parquet',",
 				"     umask: 0622,",
 				"     preCommands: [],",
