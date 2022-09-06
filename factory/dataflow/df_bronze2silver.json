@@ -109,11 +109,15 @@
 				},
 				{
 					"name": "union1"
+				},
+				{
+					"name": "parse1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[],",
+				"          movie as string,",
+				"          SourceFile as string,",
 				"          IngestTime as timestamp,",
 				"          p_IngestDate as date,",
 				"          Status as string",
@@ -122,7 +126,6 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
-				"     rowUrlColumn: 'SourceFile',",
 				"     format: 'parquet') ~> bronze",
 				"bronze select(mapColumn(",
 				"          MovieId = movie[1].Id,",
@@ -164,7 +167,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
-				"bronze select(mapColumn(",
+				"parse1 select(mapColumn(",
 				"          movie,",
 				"          MovieId = movie[1].Id,",
 				"          BackdropUrl = movie[1].BackdropUrl,",
@@ -256,6 +259,9 @@
 				"     skipDuplicateMapOutputs: true) ~> select12",
 				"select12 derive(Status = \"clean\") ~> derivedColumn3",
 				"derivedColumn1, derivedColumn3 union(byName: true)~> union1",
+				"bronze parse(movie = movie,",
+				"     format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1",
 				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -291,6 +297,13 @@
 				"     skipDuplicateMapOutputs: true) ~> movie",
 				"select11 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          movie as string,",
+				"          SourceFile as string,",
+				"          IngestTime as timestamp,",
+				"          p_IngestDate as date,",
+				"          Status as string",
+				"     ),",
 				"     format: 'parquet',",
 				"     umask: 0622,",
 				"     preCommands: [],",
