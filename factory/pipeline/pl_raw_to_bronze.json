@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "df_unittest",
+				"name": "df_raw2bronze",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_unittest",
+						"referenceName": "df_raw2bronze",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"raw": {
