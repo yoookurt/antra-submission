@@ -9,7 +9,7 @@
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "raw"
+					"name": "bronze"
 				}
 			],
 			"sinks": [],
@@ -25,7 +25,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> raw"
+				"     format: 'parquet') ~> bronze"
 			]
 		}
 	}
