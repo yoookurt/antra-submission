@@ -26,6 +26,9 @@
 					"name": "addMetadata"
 				},
 				{
+					"name": "select1"
+				},
+				{
 					"name": "derivedColumn1"
 				}
 			],
@@ -33,7 +36,7 @@
 				"source(output(",
 				"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[]",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
@@ -41,8 +44,17 @@
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata derive(moviestr = toString(flatten(movie))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"derivedColumn1 select(mapColumn(",
+				"          movie,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"addMetadata derive(column1 = movie.Id) ~> derivedColumn1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
 				"          movie as string,",
