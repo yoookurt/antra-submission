@@ -13,7 +13,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "cast1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          movie as string,",
@@ -25,7 +32,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> bronze"
+				"     format: 'parquet') ~> bronze",
+				"bronze derive(MovieStruct = movie) ~> derivedColumn1",
+				"derivedColumn1 cast(output(",
+				"          MovieStruct as ()",
+				"     ),",
+				"     errors: true) ~> cast1"
 			]
 		}
 	}
