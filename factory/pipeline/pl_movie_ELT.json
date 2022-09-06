@@ -28,10 +28,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pl_raw_to_bronze",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			},
