@@ -1,0 +1,32 @@
+{
+	"name": "df_unittest",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "raw"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          movie as string,",
+				"          SourceFile as string,",
+				"          IngestTime as timestamp,",
+				"          p_IngestDate as date,",
+				"          Status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> raw"
+			]
+		}
+	}
+}
