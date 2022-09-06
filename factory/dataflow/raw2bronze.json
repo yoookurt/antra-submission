@@ -24,9 +24,6 @@
 			"transformations": [
 				{
 					"name": "addMetadata"
-				},
-				{
-					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -40,18 +37,8 @@
 				"     documentForm: 'documentPerLine') ~> raw",
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
-				"          Status = \"new\",",
-				"          column1 = flatten(movie)) ~> addMetadata",
-				"addMetadata select(mapColumn(",
-				"          movie,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
+				"          Status = \"new\") ~> addMetadata",
+				"addMetadata sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
 				"          movie as string,",
