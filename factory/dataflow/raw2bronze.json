@@ -27,9 +27,6 @@
 				},
 				{
 					"name": "select1"
-				},
-				{
-					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -37,14 +34,15 @@
 				"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[]",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: true,",
+				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
 				"     documentForm: 'documentPerLine') ~> raw",
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
-				"          Status = \"new\") ~> addMetadata",
-				"derivedColumn1 select(mapColumn(",
+				"          Status = \"new\",",
+				"          column1 = flatten(movie)) ~> addMetadata",
+				"addMetadata select(mapColumn(",
 				"          movie,",
 				"          SourceFile,",
 				"          IngestTime,",
@@ -53,7 +51,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"addMetadata derive(column1 = movie.Id) ~> derivedColumn1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
