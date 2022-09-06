@@ -1,5 +1,5 @@
 {
-	"name": "df_unittest_copy1",
+	"name": "df_unittest",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
