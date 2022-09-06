@@ -31,7 +31,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as ()",
+				"          movie as ({} as string)",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: true,",
