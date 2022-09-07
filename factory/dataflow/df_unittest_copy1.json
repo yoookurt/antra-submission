@@ -36,13 +36,12 @@
 				"     format: 'parquet') ~> bronze",
 				"bronze sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['dump.csv'],",
 				"     umask: 0622,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     saveOrder: 1) ~> sink1"
 			]
 		}
 	}
