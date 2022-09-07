@@ -29,6 +29,27 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "movie",
+				"type": "UTF8"
+			},
+			{
+				"name": "SourceFile",
+				"type": "UTF8"
+			},
+			{
+				"name": "IngestTime",
+				"type": "INT96"
+			},
+			{
+				"name": "p_IngestDate",
+				"type": "DATE"
+			},
+			{
+				"name": "Status",
+				"type": "UTF8"
+			}
+		]
 	}
 }
