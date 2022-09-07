@@ -9,7 +9,7 @@
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "bronze"
+					"name": "brz"
 				}
 			],
 			"sinks": [
@@ -30,11 +30,11 @@
 				"          p_IngestDate as date,",
 				"          Status as string",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> bronze",
-				"bronze sink(allowSchemaDrift: true,",
+				"     format: 'parquet') ~> brz",
+				"brz sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0622,",
 				"     preCommands: [],",
