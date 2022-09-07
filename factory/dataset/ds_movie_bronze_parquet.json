@@ -20,6 +20,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-f314b5d3-0618-4656-8cbc-8368caa41597-c000.snappy.parquet",
 				"folderPath": {
 					"value": "@dataset().bronze_path",
 					"type": "Expression"
