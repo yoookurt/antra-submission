@@ -41,7 +41,8 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1) ~> sink1"
+				"     saveOrder: 1,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
