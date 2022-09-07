@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "dump.csv",
 				"folderPath": "movie/dump",
 				"fileSystem": "adlscontainer01"
 			},
