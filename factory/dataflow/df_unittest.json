@@ -46,7 +46,7 @@
 				"          MovieStruct as string[]",
 				"     ),",
 				"     errors: true) ~> cast1",
-				"cast1 sink(allowSchemaDrift: false,",
+				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['dump.csv'],",
 				"     umask: 0622,",
