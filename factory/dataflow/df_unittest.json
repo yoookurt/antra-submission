@@ -35,7 +35,7 @@
 				"     format: 'parquet') ~> bronze",
 				"bronze derive(MovieStruct = movie) ~> derivedColumn1",
 				"derivedColumn1 cast(output(",
-				"          MovieStruct as ({} as string)",
+				"          MovieStruct as string[]",
 				"     ),",
 				"     errors: true) ~> cast1"
 			]
