@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "cast1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -46,7 +49,15 @@
 				"          movie as string",
 				"     ),",
 				"     errors: true) ~> cast1",
-				"cast1 sink(allowSchemaDrift: true,",
+				"cast1 select(mapColumn(",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0622,",
 				"     preCommands: [],",
