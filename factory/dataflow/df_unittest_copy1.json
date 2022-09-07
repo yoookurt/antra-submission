@@ -21,14 +21,7 @@
 					"name": "sink1"
 				}
 			],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "cast1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          movie as string,",
@@ -41,12 +34,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> bronze",
-				"bronze derive(MovieStruct = movie) ~> derivedColumn1",
-				"derivedColumn1 cast(output(",
-				"          MovieStruct as string[]",
-				"     ),",
-				"     errors: true) ~> cast1",
-				"cast1 sink(allowSchemaDrift: true,",
+				"bronze sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['dump.csv'],",
 				"     umask: 0622,",
