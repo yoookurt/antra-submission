@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "movie/dump"
+				"folderPath": "movie/dump",
+				"fileSystem": "adlscontainer01"
 			}
 		},
 		"schema": {}
