@@ -3,69 +3,11 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"dataset": {
-						"referenceName": "ds_movie_bronze_parquet",
-						"type": "DatasetReference"
-					},
-					"name": "brz"
-				}
-			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "ds_unittest_csv",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "cast1"
-				},
-				{
-					"name": "select1"
-				}
-			],
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string,",
-				"          SourceFile as string,",
-				"          IngestTime as timestamp,",
-				"          p_IngestDate as date,",
-				"          Status as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> brz",
-				"brz derive(MovieStruct = movie) ~> derivedColumn1",
-				"derivedColumn1 cast(output(",
-				"          movie as string",
-				"     ),",
-				"     errors: true) ~> cast1",
-				"cast1 select(mapColumn(",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     umask: 0622,",
-				"     preCommands: [],",
-				"     postCommands: [],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				""
 			]
 		}
 	}
