@@ -1,5 +1,5 @@
 {
-	"name": "df_unittest_copy1",
+	"name": "df_brz2slvr_unittest",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -14,10 +14,6 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "ds_unittest_csv",
-						"type": "DatasetReference"
-					},
 					"name": "sink1"
 				}
 			],
@@ -36,13 +32,15 @@
 				"     format: 'parquet') ~> brz",
 				"brz sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     umask: 0622,",
-				"     preCommands: [],",
-				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
 				"     saveOrder: 1,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     partitionBy('hash', 1),",
+				"     preCommands: [],",
+				"     postCommands: []) ~> sink1"
 			]
 		}
 	}
