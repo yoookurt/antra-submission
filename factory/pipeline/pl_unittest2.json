@@ -1,41 +1,6 @@
 {
-	"name": "pl_raw_to_bronze",
+	"name": "pl_unittest2",
 	"properties": {
-		"activities": [
-			{
-				"name": "df_raw2bronze",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "df_raw2bronze",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"raw": {
-								"base_path": "movie/raw"
-							},
-							"sink1": {
-								"bronze_path": "movie/bronze",
-								"bronze": "bronze_table"
-							}
-						}
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			}
-		],
 		"annotations": []
 	}
 }
