@@ -28,6 +28,11 @@
 							}
 						},
 						"linkedServiceParameters": {
+							"raw": {
+								"schemaLinkedService": {
+									"base_path": "movie/raw"
+								}
+							},
 							"sink1": {
 								"schemaLinkedService": {
 									"bronze_path": "movie/bronze",
