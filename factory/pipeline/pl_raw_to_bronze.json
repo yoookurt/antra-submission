@@ -1,9 +1,9 @@
 {
-	"name": "plunittest",
+	"name": "pl_raw_to_bronze",
 	"properties": {
 		"activities": [
 			{
-				"name": "df_raw2bronze_copy1",
+				"name": "df_raw2bronze",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -25,19 +25,6 @@
 							"sink1": {
 								"bronze_path": "movie/bronze",
 								"bronze": "bronze_table"
-							}
-						},
-						"linkedServiceParameters": {
-							"raw": {
-								"schemaLinkedService": {
-									"base_path": "movie/raw"
-								}
-							},
-							"sink1": {
-								"schemaLinkedService": {
-									"bronze_path": "movie/bronze",
-									"bronze": "bronze_table"
-								}
 							}
 						}
 					},
