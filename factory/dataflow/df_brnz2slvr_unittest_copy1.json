@@ -26,6 +26,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "cast1"
 				}
 			],
 			"scriptLines": [
@@ -41,18 +44,14 @@
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> brz",
-				"derivedColumn1 select(mapColumn(",
-				"          movie = moviestr,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          movie",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
+				"cast1 select(skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"brz derive(moviestr = movie,",
 				"          movie = movie) ~> derivedColumn1",
+				"derivedColumn1 cast(output(",
+				"          moviestr as ()",
+				"     ),",
+				"     errors: false) ~> cast1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
