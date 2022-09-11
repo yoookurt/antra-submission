@@ -16,22 +16,6 @@
 				}
 			},
 			{
-				"name": "pl_raw_to_bronze",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "pl_ingest_raw_json",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "pl_bronze_to_silver",
 				"type": "ExecutePipeline",
 				"dependsOn": [
@@ -66,6 +50,26 @@
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "pl_silver_update",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_raw_to_bronze",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pl_ingest_raw_json",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_bronze",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
