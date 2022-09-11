@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
 					"name": "bronze"
 				}
 			],
@@ -108,8 +112,17 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: false,",
-				"     validateSchema: false) ~> bronze",
+				"source(output(",
+				"          movie as string,",
+				"          SourceFile as string,",
+				"          IngestTime as timestamp,",
+				"          p_IngestDate as date,",
+				"          Status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> bronze",
 				"bronze select(mapColumn(",
 				"          MovieId = movie[1].Id,",
 				"          GenreId = movie[1].genres[1].id",
@@ -224,11 +237,11 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 select(mapColumn(",
-				"          movie = {bronze@movie},",
-				"          IngestTime = {bronze@IngestTime},",
-				"          p_IngestDate = {bronze@p_IngestDate},",
-				"          SourceFile = {bronze@SourceFile},",
-				"          Status",
+				"          movie = bronze@movie,",
+				"          IngestTime = bronze@IngestTime,",
+				"          p_IngestDate = bronze@p_IngestDate,",
+				"          SourceFile = bronze@SourceFile,",
+				"          Status = union1@Status",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select11",
