@@ -1,0 +1,18 @@
+{
+	"name": "ds_unittest_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_movie",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "movie/dump"
+			}
+		},
+		"schema": {}
+	}
+}
