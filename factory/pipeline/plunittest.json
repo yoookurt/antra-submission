@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_raw2bronze_copy1",
+						"referenceName": "df_raw2bronze",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"raw": {
