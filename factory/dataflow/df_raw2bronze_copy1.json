@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_movie_raw_json_copy1",
+						"referenceName": "ds_movie_raw_json",
 						"type": "DatasetReference"
 					},
 					"name": "raw"
@@ -30,10 +30,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string[]",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
