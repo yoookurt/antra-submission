@@ -50,6 +50,7 @@
 				"          moviestr = movie) ~> addMetadata",
 				"addMetadata foldDown(unroll(movie, movie),",
 				"     mapColumn(",
+				"          movie = movie,",
 				"          SourceFile,",
 				"          IngestTime,",
 				"          p_IngestDate,",
