@@ -30,6 +30,12 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -57,7 +63,18 @@
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"addMetadata derive(moviestr = movie) ~> derivedColumn1",
-				"flatten1 sink(allowSchemaDrift: true,",
+				"flatten1 derive(MovieId = movie.Id) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          MovieId,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          moviestr",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
@@ -66,7 +83,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
-				"          MovieId = movie.Id,",
+				"          MovieId,",
 				"          SourceFile,",
 				"          IngestTime,",
 				"          p_IngestDate,",
