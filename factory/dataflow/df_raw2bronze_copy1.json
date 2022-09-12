@@ -27,12 +27,6 @@
 				},
 				{
 					"name": "flatten1"
-				},
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -58,10 +52,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 derive(MovieId = movie[1].Id) ~> derivedColumn1",
-				"derivedColumn1 select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: false,",
+				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          movie as string,",
@@ -81,8 +72,7 @@
 				"          SourceFile,",
 				"          IngestTime,",
 				"          p_IngestDate,",
-				"          Status,",
-				"          MovieId",
+				"          Status",
 				"     )) ~> sink1"
 			]
 		}
