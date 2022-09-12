@@ -12,15 +12,7 @@
 					"name": "raw"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "ds_movie_bronze_parquet",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "addMetadata"
@@ -30,9 +22,6 @@
 				},
 				{
 					"name": "derivedColumn1"
-				},
-				{
-					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -59,32 +48,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 derive(MovieId = moviestr[1].Id) ~> derivedColumn1",
-				"derivedColumn1 select(mapColumn(",
-				"          movie = moviestr,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          MovieId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: false,",
-				"     validateSchema: false,",
-				"     input(",
-				"          movie as string,",
-				"          SourceFile as string,",
-				"          IngestTime as timestamp,",
-				"          p_IngestDate as date,",
-				"          Status as string",
-				"     ),",
-				"     format: 'parquet',",
-				"     umask: 0622,",
-				"     preCommands: [],",
-				"     postCommands: [],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"flatten1 derive(MovieId = movie.Id) ~> derivedColumn1"
 			]
 		}
 	}
