@@ -37,7 +37,7 @@
 				"          p_IngestDate = currentDate(),",
 				"          Status = \"new\",",
 				"          moviestr = movie) ~> addMetadata",
-				"derivedColumn1 foldDown(unroll(movie, movie),",
+				"derivedColumn1 foldDown(unroll(moviestr, moviestr),",
 				"     mapColumn(",
 				"          movie = movie,",
 				"          SourceFile,",
