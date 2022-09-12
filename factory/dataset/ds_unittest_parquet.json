@@ -10,13 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": {
-					"value": "@{dataset().silver_path}/{dataset().movie}",
-					"type": "Expression"
-				},
+				"folderPath": "movie/dump/parquet",
 				"fileSystem": "adlscontainer01"
 			},
-			"compressionCodec": "snappy"
+			"compressionCodec": "none"
 		},
 		"schema": []
 	}
