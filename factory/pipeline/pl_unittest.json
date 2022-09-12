@@ -26,6 +26,14 @@
 								"bronze_path": "movie/bronze",
 								"bronze": "bronze_table"
 							}
+						},
+						"linkedServiceParameters": {
+							"sink1": {
+								"schemaLinkedService": {
+									"bronze_path": "movie/bronze",
+									"bronze": "bronze_table"
+								}
+							}
 						}
 					},
 					"compute": {
