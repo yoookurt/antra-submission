@@ -15,14 +15,7 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string,",
-				"          SourceFile as string,",
-				"          IngestTime as timestamp,",
-				"          p_IngestDate as date,",
-				"          Status as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1"
