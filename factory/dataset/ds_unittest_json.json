@@ -14,6 +14,28 @@
 				"fileSystem": "adlscontainer01"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"MovieId": {
+					"type": "integer"
+				},
+				"SourceFile": {
+					"type": "string"
+				},
+				"IngestTime": {
+					"type": "string"
+				},
+				"p_IngestDate": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"moviestr": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }
