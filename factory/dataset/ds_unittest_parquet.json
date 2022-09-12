@@ -1,5 +1,5 @@
 {
-	"name": "ds_unittest_csv",
+	"name": "ds_unittest_parquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "movie/dump",
+				"folderPath": "movie/dump/parquet",
 				"fileSystem": "adlscontainer01"
 			},
 			"columnDelimiter": ",",
