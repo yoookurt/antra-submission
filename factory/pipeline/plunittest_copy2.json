@@ -16,14 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_unittest_copy2",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"brz": {
-								"bronze_path": "movie/bronze",
-								"bronze": "bronze_table"
-							}
-						}
+						"referenceName": "df_unittest_copy",
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
