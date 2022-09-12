@@ -12,7 +12,11 @@
 					"name": "raw"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "addMetadata"
@@ -48,7 +52,19 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"addMetadata derive(moviestr = movie) ~> derivedColumn1"
+				"addMetadata derive(moviestr = movie) ~> derivedColumn1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          MovieId = movie.Id,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          moviestr",
+				"     )) ~> sink1"
 			]
 		}
 	}
