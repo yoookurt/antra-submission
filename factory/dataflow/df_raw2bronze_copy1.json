@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -55,6 +59,10 @@
 				"addMetadata derive(moviestr = movie) ~> derivedColumn1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
@@ -63,7 +71,7 @@
 				"          IngestTime,",
 				"          p_IngestDate,",
 				"          Status,",
-				"          moviestr",
+				"          moviestr = moviestr",
 				"     )) ~> sink1"
 			]
 		}
