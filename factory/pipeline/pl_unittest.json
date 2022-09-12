@@ -21,6 +21,10 @@
 						"datasetParameters": {
 							"raw": {
 								"base_path": "movie/raw"
+							},
+							"sink1": {
+								"bronze_path": "movie/bronze",
+								"bronze": "bronze_table"
 							}
 						}
 					},
