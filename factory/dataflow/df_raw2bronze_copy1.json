@@ -72,11 +72,12 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
-				"          movie = movie,",
+				"          movie = MovieId,",
 				"          SourceFile,",
 				"          IngestTime,",
 				"          p_IngestDate,",
-				"          Status",
+				"          Status,",
+				"          movie = movie",
 				"     )) ~> sink1"
 			]
 		}
