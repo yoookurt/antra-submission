@@ -70,7 +70,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"flatten1 derive(MovieId = moviestr.Id) ~> derivedColumn1",
-				"select1 sink(allowSchemaDrift: true,",
+				"select1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
