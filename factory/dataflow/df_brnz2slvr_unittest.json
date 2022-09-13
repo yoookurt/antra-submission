@@ -15,19 +15,8 @@
 					"name": "brz"
 				}
 			],
-			"sinks": [
-				{
-					"name": "sink1"
-				}
-			],
-			"transformations": [
-				{
-					"name": "select1"
-				},
-				{
-					"name": "derivedColumn1"
-				}
-			],
+			"sinks": [],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          SourceFile as string,",
@@ -39,30 +28,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> brz",
-				"derivedColumn1 select(mapColumn(",
-				"          movie = moviestr,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          movie",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"brz derive(moviestr = movie,",
-				"          movie = array(movie)) ~> derivedColumn1",
-				"select1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     store: 'cache',",
-				"     format: 'inline',",
-				"     output: false,",
-				"     saveOrder: 1,",
-				"     partitionBy('hash', 1),",
-				"     preCommands: [],",
-				"     postCommands: []) ~> sink1"
+				"     format: 'parquet') ~> brz"
 			]
 		}
 	}
