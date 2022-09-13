@@ -15,28 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "bronze2silver",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"source1": {
-								"bronze_path": "movie/bronze",
-								"bronze": "bronze_table"
-							},
-							"sink1": {
-								"silver_path": "movie/silver",
-								"language": "language"
-							},
-							"sink2": {
-								"silver_path": "movie/silver",
-								"movie_genre_junction": "movie_genre_junction"
-							},
-							"sink3": {
-								"silver_path": "movie/silver",
-								"genre": "genre"
-							}
-						}
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -45,6 +23,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": []
 	}
 }

@@ -44,6 +44,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": []
 	}
 }

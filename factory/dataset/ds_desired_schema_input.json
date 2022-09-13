@@ -11,6 +11,9 @@
 				"defaultValue": "bronze"
 			}
 		},
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

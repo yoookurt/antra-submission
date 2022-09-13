@@ -15,6 +15,9 @@
 				"defaultValue": "movie_genre_junction"
 			}
 		},
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {

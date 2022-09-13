@@ -1,6 +1,9 @@
 {
 	"name": "df_brnz2slvr_unittest_copy1",
 	"properties": {
+		"folder": {
+			"name": "movie"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

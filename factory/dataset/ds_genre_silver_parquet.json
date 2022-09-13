@@ -15,6 +15,9 @@
 				"defaultValue": "genre"
 			}
 		},
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {

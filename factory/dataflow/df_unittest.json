@@ -1,6 +1,9 @@
 {
 	"name": "df_unittest",
 	"properties": {
+		"folder": {
+			"name": "movie"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

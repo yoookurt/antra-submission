@@ -12,6 +12,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": []
 	}
 }

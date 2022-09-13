@@ -11,6 +11,9 @@
 				"defaultValue": "movie/raw"
 			}
 		},
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

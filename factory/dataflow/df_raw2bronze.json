@@ -1,6 +1,9 @@
 {
 	"name": "df_raw2bronze",
 	"properties": {
+		"folder": {
+			"name": "movie"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

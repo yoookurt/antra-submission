@@ -1,6 +1,9 @@
 {
 	"name": "df_schema_generator",
 	"properties": {
+		"folder": {
+			"name": "movie"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

@@ -5,6 +5,9 @@
 			"referenceName": "adls_movie",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {

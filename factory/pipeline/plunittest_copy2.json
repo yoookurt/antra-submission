@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_unittest_copy",
+						"referenceName": "df_schema_generator",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -27,6 +27,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "movie"
+		},
 		"annotations": []
 	}
 }
