@@ -49,7 +49,7 @@
 				"brz derive(moviestr = movie,",
 				"          movie = movie) ~> derivedColumn1",
 				"derivedColumn1 cast(output(",
-				"          moviestr as ()",
+				"          moviestr as ({} as string)",
 				"     ),",
 				"     errors: false) ~> cast1",
 				"select1 sink(allowSchemaDrift: true,",
