@@ -22,6 +22,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -36,10 +39,11 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
-				"source1 parse(moviestruct = movie ? (BackdropUrl as string,",
+				"source1 parse(moviestruct = movie ? (Id as integer,",
+				"          BackdropUrl as string,",
 				"          Budget as integer,",
+				"          CreatedBy as string,",
 				"          CreatedDate as string,",
-				"          Id as integer,",
 				"          ImdbUrl as string,",
 				"          OriginalLanguage as string,",
 				"          Overview as string,",
@@ -55,12 +59,17 @@
 				"     name as string)[]),",
 				"     format: 'json',",
 				"     documentForm: 'singleDocument') ~> parse1",
-				"parse1 select(mapColumn(",
+				"derivedColumn1 select(mapColumn(",
 				"          MovieId = moviestruct.Id,",
 				"          GenreId = moviestruct.genres.id",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"parse1 derive(MovieId = moviestruct.Id,",
+				"          BackdropUrl = moviestruct.BackdropUrl,",
+				"          Budget = moviestruct.Budget,",
+				"          CreatedDate = moviestruct.CreatedDate,",
+				"          CreatedBy = moviestruct.CreatedBy) ~> derivedColumn1"
 			]
 		}
 	}
