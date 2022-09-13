@@ -12,23 +12,23 @@
 						"referenceName": "ds_movie_bronze_parquet",
 						"type": "DatasetReference"
 					},
-					"name": "brz"
+					"name": "source1"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
+				"          movie as string,",
 				"          SourceFile as string,",
-				"          Status as string,",
-				"          moviestr as string,",
+				"          IngestTime as timestamp,",
 				"          p_IngestDate as date,",
-				"          IngestTime as timestamp",
+				"          Status as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> brz"
+				"     format: 'parquet') ~> source1"
 			]
 		}
 	}
