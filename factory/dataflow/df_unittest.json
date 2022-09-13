@@ -17,10 +17,6 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "ds_unittest_parquet",
-						"type": "DatasetReference"
-					},
 					"name": "sink1"
 				}
 			],
@@ -30,6 +26,9 @@
 				},
 				{
 					"name": "cast1"
+				},
+				{
+					"name": "parse1"
 				}
 			],
 			"scriptLines": [
@@ -45,19 +44,20 @@
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> bronze",
 				"bronze derive(MovieStruct = movie) ~> derivedColumn1",
-				"derivedColumn1 cast(output(",
-				"          MovieStruct as string[]",
+				"parse1 cast(output(",
+				"          MovieStruct as ()",
 				"     ),",
 				"     errors: true) ~> cast1",
+				"derivedColumn1 parse(format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1",
 				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['dump.csv'],",
-				"     umask: 0622,",
-				"     preCommands: [],",
-				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     partitionBy('hash', 1),",
+				"     preCommands: [],",
+				"     postCommands: []) ~> sink1"
 			]
 		}
 	}
