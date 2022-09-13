@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_movie_bronze_parquet",
+						"referenceName": "ds_unittest_parquet",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
