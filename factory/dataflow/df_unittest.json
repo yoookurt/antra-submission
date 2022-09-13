@@ -32,14 +32,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string,",
-				"          SourceFile as string,",
-				"          IngestTime as timestamp,",
-				"          p_IngestDate as date,",
-				"          Status as string",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> bronze",
