@@ -26,39 +26,38 @@
 					"name": "cast1"
 				},
 				{
-					"name": "cast2"
-				},
-				{
-					"name": "cast3"
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          MovieId as integer,",
+				"          IngestTime as date,",
+				"          MovieId as short,",
 				"          SourceFile as string,",
-				"          IngestTime as string,",
-				"          p_IngestDate as string,",
 				"          Status as string,",
-				"          moviestr as string",
+				"          moviestr as string,",
+				"          p_IngestDate as date",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> source1",
+				"     documentForm: 'singleDocument') ~> source1",
 				"source1 cast(output(",
 				"          IngestTime as timestamp",
 				"     ),",
 				"     errors: false) ~> cast1",
-				"cast1 cast(output(",
-				"          p_IngestDate as date",
+				"cast1 select(mapColumn(",
+				"          MovieId,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          moviestr",
 				"     ),",
-				"     errors: true) ~> cast2",
-				"cast2 cast(output(",
-				"          moviestr as string",
-				"     ),",
-				"     errors: true) ~> cast3",
-				"cast3 sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
@@ -66,7 +65,14 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     outputAssertFailedRows: true) ~> sink1"
+				"     mapColumn(",
+				"          MovieId,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status,",
+				"          moviestr",
+				"     )) ~> sink1"
 			]
 		}
 	}
