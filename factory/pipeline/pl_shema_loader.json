@@ -1,9 +1,9 @@
 {
-	"name": "pl_unittest_copy1",
+	"name": "pl_shema_loader",
 	"properties": {
 		"activities": [
 			{
-				"name": "df_unittest_copy",
+				"name": "df_schema_generator",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,8 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_unittest_copy",
-						"type": "DataFlowReference"
+						"referenceName": "df_schema_generator",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"bronze": "bronze"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
