@@ -24,9 +24,6 @@
 			"transformations": [
 				{
 					"name": "cast1"
-				},
-				{
-					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -47,17 +44,7 @@
 				"          IngestTime as timestamp",
 				"     ),",
 				"     errors: false) ~> cast1",
-				"cast1 select(mapColumn(",
-				"          MovieId,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          moviestr",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
+				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0622,",
