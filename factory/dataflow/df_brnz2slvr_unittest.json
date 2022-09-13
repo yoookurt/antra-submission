@@ -19,6 +19,9 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "parse1"
 				}
 			],
 			"scriptLines": [
@@ -33,7 +36,9 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
-				"source1 derive() ~> derivedColumn1"
+				"parse1 derive() ~> derivedColumn1",
+				"source1 parse(format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1"
 			]
 		}
 	}
