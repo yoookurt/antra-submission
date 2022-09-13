@@ -25,6 +25,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -63,7 +66,7 @@
 				"               )     ,",
 				"     format: 'json',",
 				"     documentForm: 'singleDocument') ~> parse1",
-				"derivedColumn1 select(mapColumn(",
+				"derivedColumn2 select(mapColumn(",
 				"          MovieId = moviestruct.Id,",
 				"          GenreId = moviestruct.genres.id",
 				"     ),",
@@ -80,7 +83,9 @@
 				"          ReleaseDate = moviestruct.ReleaseDate,",
 				"          Price = moviestruct.Price,",
 				"          UpdatedBy = moviestruct.UpdatedBy,",
-				"          UpdatedDate = moviestruct.UpdatedDate) ~> derivedColumn1"
+				"          UpdatedDate = moviestruct.UpdatedDate) ~> derivedColumn1",
+				"derivedColumn1 derive(GenreId = moviestruct.genres.id,",
+				"          GenreName = moviestruct.genres.name) ~> derivedColumn2"
 			]
 		}
 	}
