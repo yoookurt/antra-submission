@@ -46,7 +46,7 @@
 				"          Status = \"new\") ~> addMetadata",
 				"addMetadata foldDown(unroll(movie, movie),",
 				"     mapColumn(",
-				"          movie,",
+				"          movie = movie,",
 				"          SourceFile,",
 				"          IngestTime,",
 				"          p_IngestDate,",
