@@ -1,5 +1,5 @@
 {
-	"name": "df_brnz2slvr_unittest",
+	"name": "df_bronze2silver_dev",
 	"properties": {
 		"folder": {
 			"name": "movie"
@@ -18,10 +18,10 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
+					"name": "parse1"
 				},
 				{
-					"name": "parse1"
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -36,12 +36,11 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
-				"parse1 derive() ~> derivedColumn1",
-				"source1 parse(moviestruct = movie ? (Id as short,",
-				"          BackdropUrl as string,",
+				"source1 parse(moviestruct = movie ? (BackdropUrl as string,",
 				"          Budget as double,",
 				"          CreatedBy as string,",
 				"          CreatedDate as string,",
+				"          Id as short,",
 				"          ImdbUrl as string,",
 				"          OriginalLanguage as string,",
 				"          Overview as string,",
@@ -58,7 +57,13 @@
 				"          genres as (id as short,",
 				"          name as string)),",
 				"     format: 'json',",
-				"     documentForm: 'singleDocument') ~> parse1"
+				"     documentForm: 'documentPerLine') ~> parse1",
+				"parse1 select(mapColumn(",
+				"          MovieId = moviestruct.Id,",
+				"          GenreId = moviestruct.genres.id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
