@@ -59,7 +59,8 @@
 				"          p_IngestDate,",
 				"          Status,",
 				"          moviestr",
-				"     )) ~> sink1"
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
