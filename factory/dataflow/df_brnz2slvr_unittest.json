@@ -22,6 +22,9 @@
 				},
 				{
 					"name": "parse1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -37,10 +40,29 @@
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
 				"parse1 derive() ~> derivedColumn1",
-				"source1 parse(moviestuct = movie ? (id as undefined,",
-				"          BackUrl as string),",
+				"derivedColumn2 parse(movie = movie ? (Id as short,",
+				"          BackdropUrl as string,",
+				"          Budget as double,",
+				"          CreatedBy as string,",
+				"          CreatedDate as string,",
+				"          ImdbUrl as string,",
+				"          OriginalLanguage as string,",
+				"          Overview as string,",
+				"          PosterUrl as string,",
+				"          Price as double,",
+				"          ReleaseDate as date,",
+				"          Revenue as date,",
+				"          RunTime as short,",
+				"          Tagline as string,",
+				"          Title as string,",
+				"          TmdbUrl as string,",
+				"          UpdatedBy as string,",
+				"          UpdatedDate as date,",
+				"          genres as (id as short,",
+				"          name as string)),",
 				"     format: 'json',",
-				"     documentForm: 'singleDocument') ~> parse1"
+				"     documentForm: 'singleDocument') ~> parse1",
+				"source1 derive(moviestr = movie) ~> derivedColumn2"
 			]
 		}
 	}
