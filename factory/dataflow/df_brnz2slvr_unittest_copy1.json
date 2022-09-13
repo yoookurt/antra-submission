@@ -1,0 +1,65 @@
+{
+	"name": "df_brnz2slvr_unittest_copy1",
+	"properties": {
+		"folder": {
+			"name": "movie"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "parse1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          movie as string,",
+				"          SourceFile as string,",
+				"          IngestTime as timestamp,",
+				"          p_IngestDate as date,",
+				"          Status as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> source1",
+				"parse1 derive() ~> derivedColumn1",
+				"source1 parse(moviestruct = movie ? (Id as short,",
+				"          BackdropUrl as string,",
+				"          Budget as double,",
+				"          CreatedBy as string,",
+				"          CreatedDate as string,",
+				"          ImdbUrl as string,",
+				"          OriginalLanguage as string,",
+				"          Overview as string,",
+				"          PosterUrl as string,",
+				"          Price as double,",
+				"          ReleaseDate as date,",
+				"          Revenue as date,",
+				"          RunTime as short,",
+				"          Tagline as string,",
+				"          Title as string,",
+				"          TmdbUrl as string,",
+				"          UpdatedBy as string,",
+				"          UpdatedDate as date,",
+				"          genres as (id as short,",
+				"          name as string)),",
+				"     format: 'json',",
+				"     documentForm: 'singleDocument') ~> parse1"
+			]
+		}
+	}
+}
