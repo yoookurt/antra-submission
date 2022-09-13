@@ -1,12 +1,12 @@
 {
-	"name": "df_unittest_copy",
+	"name": "df_schema_generator",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_unittest_json",
+						"referenceName": "ds_desired_schema_input",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_unittest_parquet",
+						"referenceName": "ds_desired_schema",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"

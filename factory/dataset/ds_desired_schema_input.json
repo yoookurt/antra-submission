@@ -1,5 +1,5 @@
 {
-	"name": "ds_desired_schema_json",
+	"name": "ds_desired_schema_input",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
