@@ -40,7 +40,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
 				"parse1 derive() ~> derivedColumn1",
-				"derivedColumn2 parse(moviestruct = movie ? (Id as short,",
+				"derivedColumn2 parse(moviestruct = moviestr ? (Id as short,",
 				"          BackdropUrl as string,",
 				"          Budget as double,",
 				"          CreatedBy as string,",
