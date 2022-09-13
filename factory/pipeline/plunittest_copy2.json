@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "df_unittest_copy2",
+				"name": "df_unittest_copy",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
