@@ -74,13 +74,13 @@
 				"          Budget = moviestruct.Budget,",
 				"          CreatedBy = moviestruct.CreatedBy,",
 				"          CreatedDate = moviestruct.CreatedDate,",
-				"          column1 = ERROR_FUNCTION(''),",
-				"          column2 = ERROR_FUNCTION(''),",
-				"          column3 = ERROR_FUNCTION(''),",
-				"          column4 = ERROR_FUNCTION(''),",
-				"          column5 = ERROR_FUNCTION(''),",
-				"          column6 = ERROR_FUNCTION(''),",
-				"          column7 = ERROR_FUNCTION('')) ~> derivedColumn1"
+				"          Overview = moviestruct.Overview,",
+				"          OriginalLanguage = moviestruct.OriginalLanguage,",
+				"          RunTime = moviestruct.RunTime,",
+				"          ReleaseDate = moviestruct.ReleaseDate,",
+				"          Price = moviestruct.Price,",
+				"          UpdatedBy = moviestruct.UpdatedBy,",
+				"          UpdatedDate = moviestruct.UpdatedDate) ~> derivedColumn1"
 			]
 		}
 	}
