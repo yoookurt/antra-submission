@@ -1,5 +1,5 @@
 {
-	"name": "ds_unittest_parquet",
+	"name": "ds_desired_schema",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_movie",
