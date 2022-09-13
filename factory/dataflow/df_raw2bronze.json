@@ -68,7 +68,14 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          SourceFile,",
+				"          Status,",
+				"          p_IngestDate,",
+				"          IngestTime,",
+				"          moviestr = movie",
+				"     )) ~> sink1"
 			]
 		}
 	}
