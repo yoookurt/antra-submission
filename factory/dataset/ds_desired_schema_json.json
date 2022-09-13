@@ -5,12 +5,18 @@
 			"referenceName": "adls_movie",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"bronze": {
+				"type": "string",
+				"defaultValue": "bronze"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "movie/schema/json",
+				"folderPath": "movie/schema/input_json/bronze",
 				"fileSystem": "adlscontainer01"
 			}
 		},
