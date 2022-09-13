@@ -52,14 +52,6 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          MovieId,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status,",
-				"          moviestr",
-				"     ),",
 				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
