@@ -48,6 +48,14 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          movie,",
+				"          moviestr,",
+				"          SourceFile,",
+				"          p_IngestDate,",
+				"          IngestTime,",
+				"          Status",
+				"     ),",
 				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
