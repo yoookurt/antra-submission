@@ -12,11 +12,15 @@
 						"referenceName": "ds_movie_raw_json",
 						"type": "DatasetReference"
 					},
-					"name": "bronze"
+					"name": "raw2bronze"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "parse1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          movie as string[]",
@@ -24,7 +28,10 @@
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> bronze"
+				"     documentForm: 'documentPerLine') ~> raw2bronze",
+				"raw2bronze parse(movie = movie ? string[],",
+				"     format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1"
 			]
 		}
 	}
