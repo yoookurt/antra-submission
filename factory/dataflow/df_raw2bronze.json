@@ -30,6 +30,12 @@
 				},
 				{
 					"name": "flatten1"
+				},
+				{
+					"name": "parse1"
+				},
+				{
+					"name": "flatten2"
 				}
 			],
 			"scriptLines": [
@@ -54,6 +60,19 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"addMetadata parse(movie = toString(movie) ? string[],",
+				"     format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1",
+				"parse1 foldDown(unroll(movie, movie),",
+				"     mapColumn(",
+				"          movie,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          p_IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten2",
 				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
