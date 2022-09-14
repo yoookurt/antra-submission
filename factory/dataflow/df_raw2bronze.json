@@ -22,6 +22,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
+				},
+				{
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -40,7 +43,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as (BackdropUrl as string, Budget as double, CreatedBy as string, CreatedDate as string, Id as short, ImdbUrl as string, OriginalLanguage as string, Overview as string, PosterUrl as string, Price as double, ReleaseDate as string, Revenue as double, RunTime as short, Tagline as string, Title as string, TmdbUrl as string, UpdatedBy as string, UpdatedDate as string, genres as (id as short, name as string)[])[]",
+				"          movie as string[]",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
@@ -60,7 +63,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"addMetadata parse(movie = toString(movie) ? string[],",
+				"addMetadata parse(movie = movie ? string[],",
 				"     format: 'json',",
 				"     documentForm: 'singleDocument') ~> parse1",
 				"parse1 foldDown(unroll(movie, movie),",
@@ -93,7 +96,14 @@
 				"          IngestTime,",
 				"          p_IngestDate,",
 				"          Status",
-				"     )) ~> sink1"
+				"     )) ~> sink1",
+				"flatten2 sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> sink2"
 			]
 		}
 	}
