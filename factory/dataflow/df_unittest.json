@@ -9,55 +9,22 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_movie_bronze_parquet",
+						"referenceName": "ds_movie_raw_json",
 						"type": "DatasetReference"
 					},
 					"name": "bronze"
 				}
 			],
-			"sinks": [
-				{
-					"name": "sink1"
-				}
-			],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "cast1"
-				},
-				{
-					"name": "parse1"
-				}
-			],
+			"sinks": [],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          SourceFile as string,",
-				"          Status as string,",
-				"          moviestr as string,",
-				"          p_IngestDate as date,",
-				"          IngestTime as timestamp",
+				"          movie as string[]",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> bronze",
-				"bronze derive(MovieStruct = movie) ~> derivedColumn1",
-				"parse1 cast(output(",
-				"          MovieStruct as ({} as string)",
-				"     ),",
-				"     errors: true) ~> cast1",
-				"derivedColumn1 parse(format: 'json',",
-				"     documentForm: 'documentPerLine') ~> parse1",
-				"cast1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     partitionFileNames:['dump.csv'],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1),",
-				"     preCommands: [],",
-				"     postCommands: []) ~> sink1"
+				"     documentForm: 'documentPerLine') ~> bronze"
 			]
 		}
 	}
