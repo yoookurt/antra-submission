@@ -42,10 +42,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string[]",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
