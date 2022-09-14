@@ -63,7 +63,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"addMetadata parse(movie = movie ? string,",
+				"addMetadata parse(movie = toString(movie) ? string,",
 				"     format: 'json',",
 				"     documentForm: 'documentPerLine') ~> parse1",
 				"parse1 foldDown(unroll(movie, movie),",
