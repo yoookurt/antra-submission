@@ -65,7 +65,7 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"addMetadata parse(movie = toString(movie) ? string,",
 				"     format: 'json',",
-				"     documentForm: 'documentPerLine') ~> parse1",
+				"     documentForm: 'singleDocument') ~> parse1",
 				"parse1 foldDown(unroll(movie, movie),",
 				"     mapColumn(",
 				"          movie,",
