@@ -19,6 +19,9 @@
 			"transformations": [
 				{
 					"name": "parse1"
+				},
+				{
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
@@ -31,7 +34,13 @@
 				"     documentForm: 'documentPerLine') ~> raw2bronze",
 				"raw2bronze parse(movie = movie ? string[],",
 				"     format: 'json',",
-				"     documentForm: 'documentPerLine') ~> parse1"
+				"     documentForm: 'documentPerLine') ~> parse1",
+				"parse1 foldDown(unroll(movie, movie),",
+				"     mapColumn(",
+				"          movie",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1"
 			]
 		}
 	}
