@@ -26,16 +26,6 @@
 				"fileSystem": "adlscontainer01"
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-				"movie": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				}
-			}
-		}
+		"schema": {}
 	}
 }
