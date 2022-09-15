@@ -67,8 +67,10 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
-				"          SourceFile = movie,",
-				"          movie",
+				"          Status,",
+				"          movie,",
+				"          IngestTime,",
+				"          p_IngestDate = IngestDate",
 				"     )) ~> sink1"
 			]
 		}
