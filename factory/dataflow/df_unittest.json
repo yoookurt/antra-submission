@@ -15,13 +15,21 @@
 					"name": "raw2bronze"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_movie_bronze_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
-					"name": "parse1"
+					"name": "flatten1"
 				},
 				{
-					"name": "flatten1"
+					"name": "addMetadata"
 				}
 			],
 			"scriptLines": [
@@ -31,16 +39,37 @@
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
+				"     rowUrlColumn: 'SourceFile',",
 				"     documentForm: 'documentPerLine') ~> raw2bronze",
-				"raw2bronze parse(movie = movie ? string[],",
-				"     format: 'json',",
-				"     documentForm: 'documentPerLine') ~> parse1",
-				"parse1 foldDown(unroll(movie, movie),",
+				"raw2bronze foldDown(unroll(movie, movie),",
 				"     mapColumn(",
 				"          movie",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1"
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 derive(IngestTime = currentTimestamp(),",
+				"          IngestDate = currentDate(),",
+				"          Status = \"new\") ~> addMetadata",
+				"addMetadata sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SourceFile as string,",
+				"          Status as string,",
+				"          moviestr as string,",
+				"          p_IngestDate as date,",
+				"          movie as string,",
+				"          IngestTime as timestamp",
+				"     ),",
+				"     format: 'parquet',",
+				"     umask: 0622,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          SourceFile = movie,",
+				"          movie",
+				"     )) ~> sink1"
 			]
 		}
 	}
