@@ -30,6 +30,9 @@
 				},
 				{
 					"name": "flatten1"
+				},
+				{
+					"name": "parse1"
 				}
 			],
 			"scriptLines": [
@@ -44,7 +47,7 @@
 				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata foldDown(unroll(movie, movie),",
+				"parse1 foldDown(unroll(movie, movie),",
 				"     mapColumn(",
 				"          movie,",
 				"          SourceFile,",
@@ -54,6 +57,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"addMetadata parse(format: 'json',",
+				"     documentForm: 'documentPerLine') ~> parse1",
 				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
