@@ -47,7 +47,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 derive(IngestTime = currentTimestamp(),",
+				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
 				"addMetadata sink(allowSchemaDrift: false,",
