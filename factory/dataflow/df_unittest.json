@@ -26,13 +26,10 @@
 			],
 			"transformations": [
 				{
-					"name": "flatten1"
-				},
-				{
 					"name": "addMetadata"
 				},
 				{
-					"name": "flatten2"
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
@@ -44,12 +41,6 @@
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
 				"     documentForm: 'documentPerLine') ~> raw2bronze",
-				"raw2bronze foldDown(unroll(movie, movie),",
-				"     mapColumn(",
-				"          movie",
-				"     ),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
@@ -62,8 +53,8 @@
 				"          Status",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten2",
-				"flatten2 sink(allowSchemaDrift: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          SourceFile as string,",
