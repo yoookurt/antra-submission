@@ -30,6 +30,9 @@
 				},
 				{
 					"name": "addMetadata"
+				},
+				{
+					"name": "flatten2"
 				}
 			],
 			"scriptLines": [
@@ -50,7 +53,17 @@
 				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata sink(allowSchemaDrift: false,",
+				"addMetadata foldDown(unroll(movie, movie),",
+				"     mapColumn(",
+				"          movie,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten2",
+				"flatten2 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          SourceFile as string,",
