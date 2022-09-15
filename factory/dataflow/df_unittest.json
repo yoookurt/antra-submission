@@ -33,6 +33,9 @@
 				},
 				{
 					"name": "parse1"
+				},
+				{
+					"name": "flatten2"
 				}
 			],
 			"scriptLines": [
@@ -60,6 +63,16 @@
 				"addMetadata parse(movie = movie ? string[],",
 				"     format: 'json',",
 				"     documentForm: 'documentPerLine') ~> parse1",
+				"addMetadata foldDown(unroll(movie, movie),",
+				"     mapColumn(",
+				"          movie,",
+				"          SourceFile,",
+				"          IngestTime,",
+				"          IngestDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten2",
 				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
