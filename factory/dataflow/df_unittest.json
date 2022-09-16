@@ -39,14 +39,11 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          movie as string[]",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
-				"     documentForm: 'documentPerLine') ~> raw2bronze",
+				"     documentForm: 'singleDocument') ~> raw2bronze",
 				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
