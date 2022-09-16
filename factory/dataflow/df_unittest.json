@@ -43,7 +43,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     rowUrlColumn: 'SourceFile',",
-				"     documentForm: 'singleDocument') ~> raw2bronze",
+				"     documentForm: 'documentPerLine') ~> raw2bronze",
 				"raw2bronze derive(IngestTime = currentTimestamp(),",
 				"          IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
