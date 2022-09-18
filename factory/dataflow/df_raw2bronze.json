@@ -22,9 +22,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
-				},
-				{
-					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -33,12 +30,6 @@
 				},
 				{
 					"name": "flatten1"
-				},
-				{
-					"name": "parse1"
-				},
-				{
-					"name": "flatten2"
 				}
 			],
 			"scriptLines": [
@@ -60,19 +51,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"addMetadata parse(movie = toString(movie) ? string,",
-				"     format: 'json',",
-				"     documentForm: 'singleDocument') ~> parse1",
-				"parse1 foldDown(unroll(movie, movie),",
-				"     mapColumn(",
-				"          movie,",
-				"          SourceFile,",
-				"          IngestTime,",
-				"          p_IngestDate,",
-				"          Status",
-				"     ),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten2",
 				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
@@ -93,14 +71,7 @@
 				"          IngestTime,",
 				"          p_IngestDate,",
 				"          Status",
-				"     )) ~> sink1",
-				"flatten2 sink(validateSchema: false,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     store: 'cache',",
-				"     format: 'inline',",
-				"     output: false,",
-				"     saveOrder: 1) ~> sink2"
+				"     )) ~> sink1"
 			]
 		}
 	}
