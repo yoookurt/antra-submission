@@ -32,7 +32,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as string,",
+				"          movie as (Id as long, Title as string, Overview as string, Tagline as string, Budget as double, Revenue as double, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, BackdropUrl as string, OriginalLanguage as string, ReleaseDate as string, RunTime as integer, Price as double, CreatedDate as string, UpdatedDate as string, UpdatedBy as string, CreatedBy as string, genres as (id as integer, name as string)[]),",
 				"          SourceFile as string,",
 				"          IngestTime as timestamp,",
 				"          p_IngestDate as date,",
