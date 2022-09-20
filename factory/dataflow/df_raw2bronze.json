@@ -34,7 +34,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as (Budget as double, BackdropUrl as string, CreatedBy as string, CreatedDate as string, Id as integer, Title as string, Overview as string, Tagline as string, Revenue as double, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, OriginalLanguage as string, ReleaseDate as date, RunTime as integer, Price as double, UpdatedBy as string, UpdatedDate as date, genres as (id as integer, name as string)[])[]",
+				"          movie as (Budget as float, BackdropUrl as string, CreatedBy as string, CreatedDate as string, Id as integer, Title as string, Overview as string, Tagline as string, Revenue as float, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, OriginalLanguage as string, ReleaseDate as date, RunTime as integer, Price as float, UpdatedBy as string, UpdatedDate as date, genres as (id as integer, name as string)[])[]",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
