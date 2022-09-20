@@ -126,7 +126,7 @@
 				"          movie as string,",
 				"          IngestTime as timestamp",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> bronze",
