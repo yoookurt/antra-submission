@@ -46,7 +46,7 @@
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata foldDown(unroll(movie, movie),",
+				"addMetadata foldDown(unroll(movie),",
 				"     mapColumn(",
 				"          movie = movie,",
 				"          SourceFile,",
