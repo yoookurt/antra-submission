@@ -16,20 +16,7 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "parse1"
-				},
-				{
-					"name": "select1"
-				},
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "derivedColumn2"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          movie as (Id as long, Title as string, Overview as string, Tagline as string, Budget as double, Revenue as double, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, BackdropUrl as string, OriginalLanguage as string, ReleaseDate as string, RunTime as integer, Price as double, CreatedDate as string, UpdatedDate as string, UpdatedBy as string, CreatedBy as string, genres as (id as integer, name as string)[]),",
@@ -41,48 +28,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> source1",
-				"source1 parse(moviestruct = movie ? (Id as integer,",
-				"          Title as string,",
-				"          Overview as string,",
-				"          Tagline as string,",
-				"          Budget as double,",
-				"          Revenue as double,",
-				"          ImdbUrl as string,",
-				"          TmdbUrl as string,",
-				"          PosterUrl as string,",
-				"          BackdropUrl as string,",
-				"          OriginalLanguage as string,",
-				"          ReleaseDate as date,",
-				"          RunTime as integer,",
-				"          Price as double,",
-				"          CreatedBy as string,",
-				"          CreatedDate as string,",
-				"          UpdatedBy as string,",
-				"          UpdatedDate as date,",
-				"          genres as (id as integer,      name as string)[]),",
-				"     format: 'json',",
-				"     documentForm: 'singleDocument') ~> parse1",
-				"derivedColumn2 select(mapColumn(",
-				"          MovieId,",
-				"          GenreId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"parse1 derive(MovieId = moviestruct.Id,",
-				"          BackdropUrl = moviestruct.BackdropUrl,",
-				"          Budget = moviestruct.Budget,",
-				"          CreatedBy = moviestruct.CreatedBy,",
-				"          CreatedDate = moviestruct.CreatedDate,",
-				"          Overview = moviestruct.Overview,",
-				"          OriginalLanguage = moviestruct.OriginalLanguage,",
-				"          RunTime = moviestruct.RunTime,",
-				"          ReleaseDate = moviestruct.ReleaseDate,",
-				"          Price = moviestruct.Price,",
-				"          UpdatedBy = moviestruct.UpdatedBy,",
-				"          UpdatedDate = moviestruct.UpdatedDate) ~> derivedColumn1",
-				"derivedColumn1 derive(GenreId = moviestruct.genres.id,",
-				"          GenreName = moviestruct.genres.name) ~> derivedColumn2"
+				"     format: 'parquet') ~> source1"
 			]
 		}
 	}
