@@ -34,7 +34,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          movie as ({genres} as string, {Id} as integer, Title as string, Overview as string, Tagline as string, Budget as double, Revenue as double, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, BackdropUrl as string, OriginalLanguage as string, ReleaseDate as string, RunTime as integer, Price as double, CreatedDate as string, UpdatedDate as string, UpdatedBy as string, CreatedBy as string)[]",
+				"          movie as (Id as long, Title as string, Overview as string, Tagline as string, Budget as double, Revenue as double, ImdbUrl as string, TmdbUrl as string, PosterUrl as string, BackdropUrl as string, OriginalLanguage as string, ReleaseDate as string, RunTime as integer, Price as double, CreatedDate as string, UpdatedDate as string, UpdatedBy as string, CreatedBy as string, genres as (id as integer, name as string)[])[]",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
@@ -46,7 +46,7 @@
 				"raw derive(IngestTime = currentTimestamp(),",
 				"          p_IngestDate = currentDate(),",
 				"          Status = \"new\") ~> addMetadata",
-				"addMetadata foldDown(unroll(movie),",
+				"addMetadata foldDown(unroll(movie, movie),",
 				"     mapColumn(",
 				"          movie = movie,",
 				"          SourceFile,",
