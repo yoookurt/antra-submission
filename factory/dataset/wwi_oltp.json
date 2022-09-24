@@ -2,7 +2,7 @@
 	"name": "wwi_oltp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_wwi_oltp",
+			"referenceName": "sqlsvr_wwi_oltp",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
