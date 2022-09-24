@@ -2,7 +2,7 @@
 	"name": "wwi_ods",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase2",
+			"referenceName": "ls_wwi_ods",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
