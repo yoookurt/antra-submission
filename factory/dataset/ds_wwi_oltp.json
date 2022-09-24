@@ -5,100 +5,23 @@
 			"referenceName": "sqlsvr_wwi_oltp",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "wwi"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [
-			{
-				"name": "PersonID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "FullName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PreferredName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SearchName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "IsPermittedToLogon",
-				"type": "bit"
-			},
-			{
-				"name": "LogonName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "IsExternalLogonProvider",
-				"type": "bit"
-			},
-			{
-				"name": "HashedPassword",
-				"type": "varbinary"
-			},
-			{
-				"name": "IsSystemUser",
-				"type": "bit"
-			},
-			{
-				"name": "IsEmployee",
-				"type": "bit"
-			},
-			{
-				"name": "IsSalesperson",
-				"type": "bit"
-			},
-			{
-				"name": "UserPreferences",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PhoneNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "FaxNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "EmailAddress",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Photo",
-				"type": "varbinary"
-			},
-			{
-				"name": "CustomFields",
-				"type": "nvarchar"
-			},
-			{
-				"name": "OtherLanguages",
-				"type": "nvarchar"
-			},
-			{
-				"name": "LastEditedBy",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "ValidFrom",
-				"type": "datetime2",
-				"scale": 7
-			},
-			{
-				"name": "ValidTo",
-				"type": "datetime2",
-				"scale": 7
-			}
-		]
+		"schema": [],
+		"typeProperties": {
+			"schema": "@dataset().SchemaName",
+			"table": "@dataset().TableName"
+		}
 	}
 }
