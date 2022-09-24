@@ -75,7 +75,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_wwi_oltp",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference"
 					}
 				}
