@@ -100,10 +100,8 @@
 									"referenceName": "ds_wwi_oltp",
 									"type": "DatasetReference",
 									"parameters": {
-										"SchemaName": {
-											"value": "@item().TABLE_SCHEMA",
-											"type": "Expression"
-										}
+										"SchemaName": "@item().TABLE_SCHEMA",
+										"TableName": "@item().TABLE_NAME"
 									}
 								}
 							],
