@@ -129,7 +129,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('TableNameArray')",
+						"type": "Expression"
+					}
+				}
 			},
 			{
 				"name": "Tables2Move",
