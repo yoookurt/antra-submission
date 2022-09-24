@@ -10,6 +10,10 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "Purchasing",
+			"table": "Suppliers"
+		}
 	}
 }
