@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "wwi_oltp",
+						"referenceName": "ds_wwi_oltp",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -18,7 +18,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "wwi_ods",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -30,38 +30,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          SupplierID as integer,",
-				"          SupplierName as string,",
-				"          SupplierCategoryID as integer,",
-				"          PrimaryContactPersonID as integer,",
-				"          AlternateContactPersonID as integer,",
-				"          DeliveryMethodID as integer,",
-				"          DeliveryCityID as integer,",
-				"          PostalCityID as integer,",
-				"          SupplierReference as string,",
-				"          BankAccountName as string,",
-				"          BankAccountBranch as string,",
-				"          BankAccountCode as string,",
-				"          BankAccountNumber as string,",
-				"          BankInternationalCode as string,",
-				"          PaymentDays as integer,",
-				"          InternalComments as string,",
-				"          PhoneNumber as string,",
-				"          FaxNumber as string,",
-				"          WebsiteURL as string,",
-				"          DeliveryAddressLine1 as string,",
-				"          DeliveryAddressLine2 as string,",
-				"          DeliveryPostalCode as string,",
-				"          DeliveryLocation as binary,",
-				"          PostalAddressLine1 as string,",
-				"          PostalAddressLine2 as string,",
-				"          PostalPostalCode as string,",
-				"          LastEditedBy as integer,",
-				"          ValidFrom as timestamp,",
-				"          ValidTo as timestamp",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     query: '',",
