@@ -75,7 +75,6 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
-									"sqlReaderQuery": "select * from @{item()};",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -102,7 +101,13 @@
 							"inputs": [
 								{
 									"referenceName": "ds_wwi_oltp",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
