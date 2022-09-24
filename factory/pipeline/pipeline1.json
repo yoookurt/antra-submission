@@ -70,7 +70,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "",
+						"sqlReaderQuery": "select CustomerID from Sales.Orders limit 10;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
