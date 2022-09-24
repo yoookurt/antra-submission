@@ -5,7 +5,14 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Tables2Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -13,12 +20,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "oltp",
-						"value": "WideWorldImporters"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
@@ -128,8 +130,23 @@
 					}
 				],
 				"userProperties": []
+			},
+			{
+				"name": "Tables2Move",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableNameArray",
+					"value": "['Application.People', 'Warehouse.PackageTypes', 'Warehouse.StockItems', 'Sales.OrderLines', 'Sales.Customers', 'Sales.Orders', 'Sales.Invoices']"
+				}
 			}
 		],
+		"variables": {
+			"TableNameArray": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "wwi"
 		},
