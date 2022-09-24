@@ -1,0 +1,17 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"folder": {
+			"name": "wwi"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				""
+			]
+		}
+	}
+}
