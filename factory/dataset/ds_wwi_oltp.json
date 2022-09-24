@@ -1,5 +1,5 @@
 {
-	"name": "wwi_oltp",
+	"name": "ds_wwi_oltp",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sqlsvr_wwi_oltp",
