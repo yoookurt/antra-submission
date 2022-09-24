@@ -38,7 +38,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Filter1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -115,6 +115,19 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
 		"folder": {
