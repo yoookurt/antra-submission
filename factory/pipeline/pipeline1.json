@@ -70,12 +70,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select CustomerID from Sales.Orders limit 10;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_wwi_oltp",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference"
 					}
 				}
