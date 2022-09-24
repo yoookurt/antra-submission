@@ -113,7 +113,11 @@
 							"outputs": [
 								{
 									"referenceName": "ds_wwi_ods",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": "@item().TABLE_SCHEMA",
+										"TableName": "@item().TABLE_NAME"
+									}
 								}
 							]
 						}
