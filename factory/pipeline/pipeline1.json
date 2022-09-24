@@ -74,7 +74,10 @@
 									"type": "AzureSqlSink",
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": true,
-									"tableOption": "autoCreate",
+									"tableOption": {
+										"value": "@{item()}",
+										"type": "Expression"
+									},
 									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
