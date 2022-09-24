@@ -2,7 +2,7 @@
 	"name": "wwi_oltp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "ls_wwi_oltp",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -10,138 +10,6 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [
-			{
-				"name": "SupplierID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "SupplierName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SupplierCategoryID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PrimaryContactPersonID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "AlternateContactPersonID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "DeliveryMethodID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "DeliveryCityID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PostalCityID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "SupplierReference",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankAccountName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankAccountBranch",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankAccountCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankAccountNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BankInternationalCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PaymentDays",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "InternalComments",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PhoneNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "FaxNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "WebsiteURL",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DeliveryAddressLine1",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DeliveryAddressLine2",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DeliveryPostalCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DeliveryLocation",
-				"type": "geography"
-			},
-			{
-				"name": "PostalAddressLine1",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PostalAddressLine2",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PostalPostalCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "LastEditedBy",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "ValidFrom",
-				"type": "datetime2",
-				"scale": 7
-			},
-			{
-				"name": "ValidTo",
-				"type": "datetime2",
-				"scale": 7
-			}
-		],
-		"typeProperties": {
-			"schema": "Purchasing",
-			"table": "Suppliers"
-		}
+		"schema": []
 	}
 }
