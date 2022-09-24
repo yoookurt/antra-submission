@@ -99,10 +99,7 @@
 							"inputs": [
 								{
 									"referenceName": "ds_wwi_oltp",
-									"type": "DatasetReference",
-									"parameters": {
-										"TableName": "@item().TABLE_NAME"
-									}
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
