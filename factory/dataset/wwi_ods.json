@@ -2,7 +2,7 @@
 	"name": "wwi_ods",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_wwi_ods",
+			"referenceName": "sqlsvr_wwi_ods",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
