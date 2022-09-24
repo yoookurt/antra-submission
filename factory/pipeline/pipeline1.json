@@ -28,7 +28,11 @@
 					},
 					"dataset": {
 						"referenceName": "ds_wwi_oltp",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "@item().TABLE_SCHEMA",
+							"TableName": "@item().TABLE_NAME"
+						}
 					},
 					"firstRowOnly": false
 				}
