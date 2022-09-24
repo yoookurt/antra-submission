@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "wwi_oltp",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
