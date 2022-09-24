@@ -1,5 +1,5 @@
 {
-	"name": "wwi_ods",
+	"name": "ds_wwi_ods",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sqlsvr_wwi_ods",
