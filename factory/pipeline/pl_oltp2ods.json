@@ -132,7 +132,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('TableNameArray')",
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@not(variables('TableNameArray'))",
 						"type": "Expression"
 					}
 				}
