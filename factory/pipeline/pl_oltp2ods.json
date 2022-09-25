@@ -128,12 +128,6 @@
 						]
 					},
 					{
-						"activity": "Tables2Move_copy1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "Tables2Move",
 						"dependencyConditions": [
 							"Succeeded"
@@ -172,6 +166,35 @@
 				"typeProperties": {
 					"variableName": "TableNameArray_str",
 					"value": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
+				}
+			},
+			{
+				"name": "Filter1_copy1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tables2Move_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(variables('TableNameArray_array'), item().SchemaTableName)\n",
+						"type": "Expression"
+					}
 				}
 			}
 		],
