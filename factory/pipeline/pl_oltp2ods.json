@@ -200,10 +200,14 @@
 		],
 		"variables": {
 			"TableNameArray_str": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
 			},
 			"TableNameArray_array": {
-				"type": "Array"
+				"type": "Array",
+				"defaultValue": [
+					"['Warehouse.StockItems',' Warehouse.PackageTypes',' Application.People',' Sales.OrderLines',' Sales.Orders',' Sales.Customers',' Sales.Invoices']"
+				]
 			}
 		},
 		"folder": {
