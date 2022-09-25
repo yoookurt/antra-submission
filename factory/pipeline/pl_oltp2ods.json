@@ -78,7 +78,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select * from @{item().SchemaTableName};",
+										"value": "if object_ID(concat(@{item().SchemaTableName}, N'_Archive'), 'U') is not NULL\n    select * from @{item().SchemaTableName}\n    union\n    select * from concat(@{item().SchemaTableName}, N'_Archive')\nelse\n    select * from @{item().SchemaTableName};",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
