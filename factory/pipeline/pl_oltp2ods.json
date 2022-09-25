@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if 1>0\n    select * from @{item().SchemaTableName}\n    union\n    select * from @{concat(item().SchemaTableName, '_Archive')}\nelse\n    select * from @{item().SchemaTableName}",
+										"value": "if OBJECT_ID('Sales.Customers_Archive', 'U') is not NULL\n    select * from @{item().SchemaTableName}\n    union\n    select * from @{concat(item().SchemaTableName, '_Archive')}\nelse\n    select * from @{item().SchemaTableName}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
