@@ -158,6 +158,11 @@
 				}
 			}
 		],
+		"variables": {
+			"TableNameArray": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "wwi"
 		},
