@@ -77,13 +77,19 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
-									"sqlReaderQuery": "select * from @{item().SchemaTableName};",
+									"sqlReaderQuery": {
+										"value": "select * from @{item().SchemaTableName};",
+										"type": "Expression"
+									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"writeBehavior": "insert",
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": true
+									},
 									"sqlWriterUseTableLock": true,
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
