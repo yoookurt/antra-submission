@@ -159,7 +159,7 @@
 				}
 			},
 			{
-				"name": "Tables2Move_copy1",
+				"name": "Tables2Move_str",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"userProperties": [],
@@ -169,7 +169,7 @@
 				}
 			},
 			{
-				"name": "Filter1_copy1",
+				"name": "Filter1_str",
 				"type": "Filter",
 				"dependsOn": [
 					{
@@ -179,7 +179,7 @@
 						]
 					},
 					{
-						"activity": "Tables2Move_copy1",
+						"activity": "Tables2Move_str",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -192,7 +192,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@contains(variables('TableNameArray_array'), item().SchemaTableName)\n",
+						"value": "@contains(variables('TableNameArray_str'), item().SchemaTableName)\n",
 						"type": "Expression"
 					}
 				}
