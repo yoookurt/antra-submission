@@ -86,10 +86,7 @@
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"writeBehavior": "upsert",
-									"upsertSettings": {
-										"useTempDB": true
-									},
+									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": true,
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
@@ -154,10 +151,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableNameArray",
-					"value": {
-						"value": "array(\"Application.People\", \"Warehouse.PackageTypes\", \"Warehouse.StockItems\", \"Sales.OrderLines\", \"Sales.Customers\", \"Sales.Orders\", \"Sales.Invoices\")",
-						"type": "Expression"
-					}
+					"value": [
+						""
+					]
 				}
 			}
 		],
