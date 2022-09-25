@@ -154,13 +154,30 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableNameArray",
-					"value": "Application.People, Warehouse.PackageTypes, Warehouse.StockItems, Sales.OrderLines, Sales.Customers, Sales.Orders, Sales.Invoices"
+					"value": [
+						"Application.People",
+						" Warehouse.PackageTypes",
+						" Warehouse.StockItems",
+						" Sales.OrderLines",
+						" Sales.Customers",
+						" Sales.Orders",
+						" Sales.Invoices"
+					]
 				}
 			}
 		],
 		"variables": {
 			"TableNameArray": {
-				"type": "String"
+				"type": "Array",
+				"defaultValue": [
+					"Application.People",
+					"Warehouse.PackageTypes",
+					"Warehouse.StockItems",
+					"Sales.OrderLines",
+					"Sales.Customers",
+					"Sales.Orders",
+					"Sales.Invoices"
+				]
 			}
 		},
 		"folder": {
