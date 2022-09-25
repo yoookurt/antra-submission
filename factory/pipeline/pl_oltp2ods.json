@@ -136,7 +136,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item(),variables('TableNameArray'))",
+						"value": "@contains(variables('TableNameArray'), item().TableName)\n",
 						"type": "Expression"
 					}
 				}
