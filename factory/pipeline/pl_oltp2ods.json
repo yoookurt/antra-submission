@@ -5,14 +5,7 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Tables2Move",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -133,6 +126,18 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "Tables2Move_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tables2Move",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
@@ -153,21 +158,23 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "TableNameArray_array",
-					"value": [
-						"Warehouse.StockItems",
-						" Warehouse.PackageTypes",
-						" Application.People",
-						" Sales.OrderLines",
-						" Sales.Orders",
-						" Sales.Customers",
-						" Sales.Invoices"
-					]
+					"variableName": "TableNameArray_str",
+					"value": ""
+				}
+			},
+			{
+				"name": "Tables2Move_copy1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableNameArray_str",
+					"value": ""
 				}
 			}
 		],
 		"variables": {
-			"TableNameArray": {
+			"TableNameArray_str": {
 				"type": "String"
 			},
 			"TableNameArray_array": {
