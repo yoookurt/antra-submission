@@ -212,7 +212,13 @@
 			"TableNameArray_array": {
 				"type": "Array",
 				"defaultValue": [
-					"['Warehouse.StockItems',' Warehouse.PackageTypes',' Application.People',' Sales.OrderLines',' Sales.Orders',' Sales.Customers',' Sales.Invoices']"
+					"Warehouse.StockItems",
+					" Warehouse.PackageTypes",
+					" Application.People",
+					" Sales.OrderLines",
+					" Sales.Orders",
+					" Sales.Customers",
+					" Sales.Invoices"
 				]
 			}
 		},
