@@ -152,7 +152,7 @@
 				"typeProperties": {
 					"variableName": "TableNameArray",
 					"value": [
-						"array(\"Warehouse.PackageTypes\")"
+						"Warehouse.PackageTypes"
 					]
 				}
 			}
