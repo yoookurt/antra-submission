@@ -160,13 +160,8 @@
 				"typeProperties": {
 					"variableName": "TableNameArray_array",
 					"value": [
-						"Warehouse.StockItems",
-						"Warehouse.PackageTypes",
 						"Application.People",
-						"Sales.OrderLines",
-						"Sales.Orders",
-						"Sales.Customers",
-						"Sales.Invoices"
+						"Sales.CustomerCategories"
 					]
 				}
 			},
