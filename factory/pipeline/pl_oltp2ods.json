@@ -153,14 +153,25 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "TableNameArray",
-					"value": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
+					"variableName": "TableNameArray_array",
+					"value": [
+						"Warehouse.StockItems",
+						" Warehouse.PackageTypes",
+						" Application.People",
+						" Sales.OrderLines",
+						" Sales.Orders",
+						" Sales.Customers",
+						" Sales.Invoices"
+					]
 				}
 			}
 		],
 		"variables": {
 			"TableNameArray": {
 				"type": "String"
+			},
+			"TableNameArray_array": {
+				"type": "Array"
 			}
 		},
 		"folder": {
