@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select * from @{concat(item().SchemaTableName, '_Archive')}\n",
+										"value": "select * from @{item().SchemaTableName}\nunion\nselect * from @{concat(item().SchemaTableName, '_Archive')};\n",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
