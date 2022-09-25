@@ -148,7 +148,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableNameArray",
-					"value": "Warehouse.PackageTypes, Warehouse.StockItems, Sales.OrderLines, Sales.Customers, Sales.Orders, Sales.Invoices"
+					"value": "Application.People, Warehouse.PackageTypes, Warehouse.StockItems, Sales.OrderLines, Sales.Customers, Sales.Orders, Sales.Invoices"
 				}
 			}
 		],
