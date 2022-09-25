@@ -25,7 +25,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select TABLE_SCHEMA, TABLE_NAME, concat(TABLE_SCHEMA, '.', TABLE_NAME) as SchemaTableName from INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_CATALOG='WideWorldImporters' and TABLE_NAME not like \"%_Archive\";",
+							"value": "select TABLE_SCHEMA, TABLE_NAME, concat(TABLE_SCHEMA, '.', TABLE_NAME) as SchemaTableName from INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_CATALOG='WideWorldImporters' and TABLE_NAME not like '%_Archive';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
