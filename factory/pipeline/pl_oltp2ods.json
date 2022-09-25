@@ -152,8 +152,7 @@
 				"typeProperties": {
 					"variableName": "TableNameArray",
 					"value": [
-						"Warehouse.PackageTypes",
-						" Warehouse.StockItems"
+						"Warehouse.StockItems"
 					]
 				}
 			}
