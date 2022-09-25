@@ -36,7 +36,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Filter1",
+						"activity": "Filter1_array",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -118,7 +118,7 @@
 				}
 			},
 			{
-				"name": "Filter1",
+				"name": "Filter1_array",
 				"type": "Filter",
 				"dependsOn": [
 					{
@@ -128,7 +128,7 @@
 						]
 					},
 					{
-						"activity": "Tables2Move",
+						"activity": "Tables2Move_array",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -147,7 +147,7 @@
 				}
 			},
 			{
-				"name": "Tables2Move",
+				"name": "Tables2Move_array",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"userProperties": [],
