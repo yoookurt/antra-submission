@@ -219,12 +219,12 @@
 				"type": "Array",
 				"defaultValue": [
 					"Warehouse.StockItems",
-					" Warehouse.PackageTypes",
-					" Application.People",
-					" Sales.OrderLines",
-					" Sales.Orders",
-					" Sales.Customers",
-					" Sales.Invoices"
+					"Warehouse.PackageTypes",
+					"Application.People",
+					"Sales.OrderLines",
+					"Sales.Orders",
+					"Sales.Customers",
+					"Sales.Invoices"
 				]
 			}
 		},
