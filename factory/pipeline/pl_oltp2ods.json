@@ -152,13 +152,8 @@
 				"typeProperties": {
 					"variableName": "TableNameArray",
 					"value": [
-						"array(\"Application.People\"",
-						" Warehouse.PackageTypes",
-						" Warehouse.StockItems",
-						" Sales.OrderLines",
-						" Sales.Customers",
-						" Sales.Orders",
-						" Sales.Invoices"
+						"Warehouse.PackageTypes",
+						" Warehouse.StockItems"
 					]
 				}
 			}
