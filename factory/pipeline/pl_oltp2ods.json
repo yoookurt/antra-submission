@@ -171,7 +171,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableNameArray_str",
-					"value": ""
+					"value": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
 				}
 			}
 		],
