@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select TABLE_SCHEMA, TABLE_NAME, concat(TABLE_SCHEMA, '.', TABLE_NAME) as tableName from INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_CATALOG='WideWorldImporters' and TABLE_NAME not like '%_Archive';",
+						"sqlReaderQuery": "select TABLE_SCHEMA, TABLE_NAME, concat(TABLE_SCHEMA, '.', TABLE_NAME) as SchemaTableName from INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_CATALOG='WideWorldImporters' and TABLE_NAME not like '%_Archive';",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
