@@ -21,6 +21,10 @@
 					{
 						"name": "TABLE_NAME",
 						"value": "People"
+					},
+					{
+						"name": "Source",
+						"value": "."
 					}
 				],
 				"typeProperties": {
