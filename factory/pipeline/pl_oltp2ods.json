@@ -154,14 +154,20 @@
 			},
 			{
 				"name": "Tables2Move_array",
+				"description": "",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableNameArray_array",
 					"value": [
+						"Warehouse.StockItems",
+						"Warehouse.PackageTypes",
 						"Application.People",
-						"Sales.CustomerCategories"
+						"Sales.OrderLines",
+						"Sales.Orders",
+						"Sales.Customers",
+						"Sales.Invoices"
 					]
 				}
 			},
