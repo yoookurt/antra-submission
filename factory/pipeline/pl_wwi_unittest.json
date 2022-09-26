@@ -17,7 +17,19 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Sales.Customers;",
+						"additionalColumns": [
+							{
+								"name": "DeliveryLocation",
+								"value": {
+									"value": "DeliveryLocation.ToString()",
+									"type": "Expression"
+								}
+							}
+						],
+						"sqlReaderQuery": {
+							"value": "select * into #tt from Sales.Customers;\nalter table #tt drop column DeliveryLocation;\nselect * from #tt\n",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
