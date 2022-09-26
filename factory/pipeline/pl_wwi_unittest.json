@@ -17,17 +17,8 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"additionalColumns": [
-							{
-								"name": "DeliveryLocation",
-								"value": {
-									"value": "DeliveryLocation.ToString()",
-									"type": "Expression"
-								}
-							}
-						],
 						"sqlReaderQuery": {
-							"value": "select * into #tt from Sales.Customers;\nalter table #tt drop column DeliveryLocation;\nselect * from #tt\n",
+							"value": "select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString(), PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers\nunion\nselect CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString(), PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers_Archive",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
