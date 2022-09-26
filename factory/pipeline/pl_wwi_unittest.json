@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data4",
+				"name": "Copy data5",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Sales.OrderLines;",
+						"sqlReaderQuery": "select * from Sales.Orders;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -27,7 +27,7 @@
 						"upsertSettings": {
 							"useTempDB": false,
 							"keys": [
-								"OrderLineID"
+								"OrderID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -56,7 +56,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
-							"TableName": "OrderLines"
+							"TableName": "Orders"
 						}
 					}
 				]
