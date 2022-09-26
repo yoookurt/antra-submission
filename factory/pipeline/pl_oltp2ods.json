@@ -30,7 +30,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Application.People;",
+						"sqlReaderQuery": "select * from Application.People union select * from Application.People_Archive;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -102,7 +102,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Warehouse.PackageTypes;",
+						"sqlReaderQuery": "select * from Warehouse.PackageTypes union select * from Warehouse.PackageTypes_Archive;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -174,7 +174,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Warehouse.StockItems;",
+						"sqlReaderQuery": "select * from Warehouse.StockItems union select * from Warehouse.StockItems_Archive;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -214,6 +214,61 @@
 						"parameters": {
 							"SchemaName": "ODS",
 							"TableName": "StockItems"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data4",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from Sales.OrderLines;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": false
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_oltp",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_ods",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "ODS",
+							"TableName": "OrderLines"
 						}
 					}
 				]
