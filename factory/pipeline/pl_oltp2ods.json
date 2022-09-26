@@ -30,7 +30,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "",
+						"sqlReaderQuery": "select * from Application.People;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
