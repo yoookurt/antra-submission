@@ -55,7 +55,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_ods",
+						"referenceName": "ds_wwi_etl",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
