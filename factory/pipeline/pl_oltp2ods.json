@@ -1,0 +1,9 @@
+{
+	"name": "pl_oltp2ods",
+	"properties": {
+		"folder": {
+			"name": "wwi"
+		},
+		"annotations": []
+	}
+}
