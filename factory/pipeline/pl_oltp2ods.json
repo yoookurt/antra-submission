@@ -299,7 +299,10 @@
 						"type": "AzureSqlSink",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
-							"useTempDB": false
+							"useTempDB": false,
+							"keys": [
+								"OrderID"
+							]
 						},
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
