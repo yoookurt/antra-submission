@@ -1,0 +1,9 @@
+{
+	"name": "pl_wwi_unittest",
+	"properties": {
+		"folder": {
+			"name": "wwi"
+		},
+		"annotations": []
+	}
+}
