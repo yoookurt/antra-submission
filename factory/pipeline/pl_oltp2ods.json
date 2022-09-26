@@ -18,10 +18,9 @@
 						"name": "TABLE_SCHEMA",
 						"value": "Application"
 					},
-					null,
 					{
-						"name": "Source",
-						"value": "."
+						"name": "TABLE_NAME",
+						"value": "People"
 					}
 				],
 				"typeProperties": {
