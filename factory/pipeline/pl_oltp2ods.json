@@ -105,7 +105,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Warehouse.PackageTypes",
+						"sqlReaderQuery": {
+							"value": "select * from Warehouse.PackageTypes where ValidTo > @variables('IngestDate')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -143,7 +146,7 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "ODS",
+							"SchemaName": "Warehouse",
 							"TableName": "PackageTypes"
 						}
 					}
