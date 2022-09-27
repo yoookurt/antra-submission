@@ -2,14 +2,6 @@
 	"name": "sqlsvr_wwi_integration",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
-		"parameters": {
-			"SchemaName": {
-				"type": "string"
-			},
-			"TableName": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
@@ -17,7 +9,7 @@
 			"alwaysEncryptedSettings": {
 				"alwaysEncryptedAkvAuthType": "ManagedIdentity"
 			},
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQ2NTM5M0U3LTEwODYtNDkwNi05RTQ2LUJBMUMzRTI4QThGMF8zNGRjMTQ5MS04ZDRkLTQwYWUtYTNlYi0wY2VhN2I3MzlkNzUiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQ2NTM5M0U3LTEwODYtNDkwNi05RTQ2LUJBMUMzRTI4QThGMF9hMzEwNWExZS01ODg5LTRiNGMtYTRjNC1jZTIxNGU4NTI3MDciDQp9"
 		}
 	}
 }
