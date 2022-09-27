@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if OBJECT_ID(concat('@{item().SchemaTableName}','_Archive'), 'U') is not NULL\n    select * from @{item().SchemaTableName} where ValidTo > @{variables('ThresholdDate')} and LastEditedWhen > @variables('ThresholdDate')\n    union\n    select * from @{concat(item().SchemaTableName, '_Archive')} where ValidTo > @variables('ThresholdDate') and LastEditedWhen > @variables('ThresholdDate')\nelse\n    select * from @{item().SchemaTableName} where ValidTo > @variables('ThresholdDate') and LastEditedWhen > @variables('ThresholdDate')",
+										"value": "if OBJECT_ID(concat('@{item().SchemaTableName}','_Archive'), 'U') is not NULL\n    select * from @{item().SchemaTableName} where ValidTo > '@{variables('ThresholdDate')}' and LastEditedWhen > '@{variables('ThresholdDate')}'\n    union\n    select * from @{concat(item().SchemaTableName, '_Archive')} where ValidTo > '@{variables('ThresholdDate')}' and LastEditedWhen > '@{variables('ThresholdDate')}'\nelse\n    select * from @{item().SchemaTableName} where ValidTo > '@{variables('ThresholdDate')}' and LastEditedWhen > '@{variables('ThresholdDate')}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
