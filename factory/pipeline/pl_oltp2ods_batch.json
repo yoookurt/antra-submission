@@ -111,7 +111,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ds_wwi_etl",
+									"referenceName": "ds_wwi_ods",
 									"type": "DatasetReference",
 									"parameters": {
 										"SchemaName": "@item().TABLE_SCHEMA",
