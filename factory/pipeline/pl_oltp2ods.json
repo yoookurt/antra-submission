@@ -480,6 +480,10 @@
 			"IngestDate": {
 				"type": "String",
 				"defaultValue": "2012-12-12"
+			},
+			"ThresholdDate": {
+				"type": "String",
+				"defaultValue": "2010-1-1"
 			}
 		},
 		"folder": {
