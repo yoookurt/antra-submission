@@ -180,7 +180,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Warehouse.StockItems",
+						"sqlReaderQuery": {
+							"value": "select * from Warehouse.StockItems where [ValidTo] > @variables('IngestDate')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -218,7 +221,7 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "ODS",
+							"SchemaName": "Warehouse",
 							"TableName": "StockItems"
 						}
 					}
