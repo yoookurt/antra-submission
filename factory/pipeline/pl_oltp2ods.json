@@ -458,6 +458,11 @@
 				]
 			}
 		],
+		"variables": {
+			"IngestDate": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "wwi"
 		},
