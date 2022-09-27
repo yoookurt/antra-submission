@@ -71,7 +71,7 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "ODS",
+							"SchemaName": "Application",
 							"TableName": "People"
 						}
 					}
