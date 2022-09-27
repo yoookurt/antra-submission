@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Application.People where [ValidTo] > @variables('ThresholdDate')",
+							"value": "select * from Application.People where [ValidTo] > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -106,7 +106,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.PackageTypes where ValidTo > @variables('ThresholdDate')",
+							"value": "select * from Warehouse.PackageTypes where ValidTo > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -181,7 +181,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.StockItems where [ValidTo] > @variables('ThresholdDate')",
+							"value": "select * from Warehouse.StockItems where [ValidTo] > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -243,7 +243,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Sales.Orders where [LastEditedWhen] > @variables('ThresholdDate')",
+							"value": "select * from Sales.Orders where [LastEditedWhen] > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -305,7 +305,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Sales.Invoices where LastEditedWhen > @variables('ThresholdDate')",
+							"value": "select * from Sales.Invoices where LastEditedWhen > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -367,7 +367,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Sales.OrderLines where LastEditedWhen > @variables('ThresholdDate')",
+							"value": "select * from Sales.OrderLines where LastEditedWhen > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -429,7 +429,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers where ValidTo > @variables('ThresholdDate')",
+							"value": "select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers where ValidTo > '@{variables('ThresholdDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
