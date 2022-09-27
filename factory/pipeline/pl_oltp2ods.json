@@ -181,7 +181,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.StockItems where [ValidTo] > '@{variables('CutoffDate')}'",
+							"value": "select * from Warehouse.StockItems where [ValidTo] > '@{variables('CutoffDate')}' union select * from Warehouse.StockItems_Archive where [ValidTo] > '@{variables('CutoffDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
