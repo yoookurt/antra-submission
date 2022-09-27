@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data6",
+				"name": "Copy data2",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -13,12 +13,25 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "TABLE_SCHEMA",
+						"value": "Application"
+					},
+					{
+						"name": "TABLE_NAME",
+						"value": "People"
+					},
+					{
+						"name": "Source",
+						"value": "."
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers union select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers_Archive",
+							"value": "select * from Warehouse.PackageTypes where ValidTo > @variables('ThresholdDate')",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -30,7 +43,7 @@
 						"upsertSettings": {
 							"useTempDB": false,
 							"keys": [
-								"CustomerID"
+								"PackageTypeID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -58,8 +71,8 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "ODS",
-							"TableName": "Customers"
+							"SchemaName": "Warehouse",
+							"TableName": "PackageTypes"
 						}
 					}
 				]
