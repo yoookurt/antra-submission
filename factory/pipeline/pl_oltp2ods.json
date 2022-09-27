@@ -65,7 +65,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -137,7 +137,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -209,7 +209,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -268,7 +268,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -327,7 +327,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -386,7 +386,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
@@ -448,7 +448,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_wwi_etl",
+						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "ODS",
