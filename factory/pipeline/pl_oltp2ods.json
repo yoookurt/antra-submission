@@ -366,7 +366,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Sales.OrderLines;",
+						"sqlReaderQuery": {
+							"value": "select * from Sales.OrderLines where LastEditedWhen > @variables('IngestDate')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -404,7 +407,7 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "ODS",
+							"SchemaName": "Sales",
 							"TableName": "OrderLines"
 						}
 					}
