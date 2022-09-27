@@ -30,7 +30,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from Application.People",
+						"sqlReaderQuery": {
+							"value": "select * from Application.People where [ValidTo] > @variables('IngestDate')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
