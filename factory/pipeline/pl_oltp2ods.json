@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Application.People where [ValidTo] > '@{variables('CutoffDate')}'",
+							"value": "select * from Application.People where [ValidTo] > '@{variables('CutoffDate')}' union select * from Application.People_Archive where [ValidTo] > '@{variables('CutoffDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -106,7 +106,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.PackageTypes where ValidTo > '@{variables('CutoffDate')}'",
+							"value": "select * from Warehouse.PackageTypes where ValidTo > '@{variables('CutoffDate')}' union select * from Warehouse.PackageTypes_Archive where ValidTo > '@{variables('CutoffDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
