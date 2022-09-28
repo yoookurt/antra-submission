@@ -15,14 +15,14 @@
 				},
 				"userProperties": [],
 				"linkedServiceName": {
-					"referenceName": "sqlsvr_wwi_ods",
+					"referenceName": "sqlsvr_wwi_dw",
 					"type": "LinkedServiceReference"
 				},
 				"typeProperties": {
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "select top 10 * from ods.Orders"
+							"text": "select top 10 * from Integration.Lineage"
 						}
 					]
 				}
