@@ -22,7 +22,10 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "if "
+							"text": {
+								"value": "if OBJECT_ID('Integration.Lineage', 'U') is not NULL\n    select * from Integration.Lineage\nelse\n    create table Integration.Lineage (\n\t[Lineage Key] int DEFAULT NEXT VALUE FOR [Sequences].[LineageKey] NOT NULL,\n\t[TableName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n    [SchemaName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n    [Data Load Started] datetime2 NOT NULL,\n\t\n\t[Data Load Completed] datetime2 NULL,\n\t[Was Successful] bit NOT NULL,\n\t[Source System Cutoff Time] datetime2 NOT NULL,\n\tCONSTRAINT PK_Integration_Lineage PRIMARY KEY ([Lineage Key])\n)",
+								"type": "Expression"
+							}
 						}
 					]
 				}
