@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "if OBJECT_ID('Integration.ETLCutoff')', 'U') is not NULL\n    select * from Integration.ETLCutoff",
+							"value": "if OBJECT_ID('Integration.ETLCutoff', 'U') is not NULL\n    select * from Integration.ETLCutoff",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
