@@ -34,7 +34,11 @@
 				"name": "Set variable1",
 				"type": "SetVariable",
 				"dependsOn": [],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "etl_cutoff_time",
+					"value": ""
+				}
 			}
 		],
 		"variables": {
