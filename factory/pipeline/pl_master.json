@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "select top 10 * from Integration.Lineage"
+							"text": "select * from Integration.Lineage"
 						}
 					]
 				}
