@@ -13,7 +13,22 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_wwi_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Integration",
+							"TableName": "ETLCutoff"
+						}
+					}
+				}
 			},
 			{
 				"name": "Set variable1",
