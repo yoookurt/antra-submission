@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.PackageTypes where ValidTo > '@{variables('CutoffDate')}'",
+							"value": "select * from Warehouse.PackageTypes where ValidFrom > '@{variables('CutoffDate')}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
