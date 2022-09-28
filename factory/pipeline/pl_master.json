@@ -23,11 +23,28 @@
 						{
 							"type": "NonQuery",
 							"text": {
-								"value": "if OBJECT_ID('Integration.Lineage', 'U') is NULL\nBEGIN\n    create schema Integration;\n    create table Integration.Lineage (\n        LineageKey int Identity(1,1),\n        TableName sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n        SchemaName sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n        [WasSuccessful] bit NOT NULL,\n        CutoffDate datetime2 not null,\n        WatermarkTime datetime2 not null,\n        CONSTRAINT PK_IL primary key (LineageKey)\n    );\nEND",
+								"value": "create schema Integration;\ncreate table Integration.Lineage (\n        LineageKey int Identity(1,1),\n        TableName sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n        SchemaName sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n        [WasSuccessful] bit NOT NULL,\n        CutoffDate datetime2 not null,\n        WatermarkTime datetime2 not null,\n        CONSTRAINT PK_IL primary key (LineageKey)\n);\n",
 								"type": "Expression"
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Script1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "etl_cutoff_time",
+					"value": "2010-1-1"
 				}
 			}
 		],
