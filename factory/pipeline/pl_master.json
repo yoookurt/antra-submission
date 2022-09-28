@@ -46,6 +46,12 @@
 					"variableName": "etl_cutoff_time",
 					"value": "2010-1-1"
 				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": []
 			}
 		],
 		"variables": {
