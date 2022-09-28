@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "select * from Integration.Lineage"
+							"text": "if "
 						}
 					]
 				}
