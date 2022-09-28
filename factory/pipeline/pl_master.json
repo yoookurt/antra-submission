@@ -23,7 +23,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "if OBJECT_ID('Integration.Lineage', 'U') is not NULL\n    select * from Integration.Lineage\nelse\n    create table Integration.Lineage (\n\t[LineageKey] int AUTO_INCREMENT NOT NULL,\n\t[TableName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n    [SchemaName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n\t[CutoffTime] datetime2 NOT NULL,\n    [WatermarkTime] datetime2 NOT NULL,\n\t[Was Successful] bit NOT NULL,\n\tCONSTRAINT PK_Integration_Lineage PRIMARY KEY ([LineageKey])\n\t)\n\t",
+								"value": "if OBJECT_ID('Integration.Lineage', 'U') is not NULL\n    select * from Integration.Lineage\nelse\n    create table Integration.Lineage (\n\t[LineageKey] int NOT NULL AUTO_INCREMENT,\n\t[TableName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n    [SchemaName] sysname COLLATE Latin1_General_100_CI_AS NOT NULL,\n\t[CutoffTime] datetime2 NOT NULL,\n    [WatermarkTime] datetime2 NOT NULL,\n\t[Was Successful] bit NOT NULL,\n\tCONSTRAINT PK_Integration_Lineage PRIMARY KEY ([LineageKey])\n\t)\n\t",
 								"type": "Expression"
 							}
 						}
