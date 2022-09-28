@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
-				"type": "Lookup",
+				"name": "Script1",
+				"type": "Script",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -14,24 +14,17 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "sqlsvr_wwi_ods",
+					"type": "LinkedServiceReference"
+				},
 				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "select * from Integration.ETLCutoff",
-							"type": "Expression"
-						},
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_wwi_dw",
-						"type": "DatasetReference",
-						"parameters": {
-							"SchemaName": "Integration",
-							"TableName": "ETLCutoff"
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "select top 10 * from ods.Orders"
 						}
-					}
+					]
 				}
 			}
 		],
