@@ -202,7 +202,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.StockItems where [ValidFrom] > '@{variables('CutoffDate')}' union select * from Warehouse.StockItems_Archive where [ValidFrom] > '@{variables('CutoffDate')}'",
+							"value": "select * from Warehouse.StockItems for system_time from '@{variables('CutoffDate')}' to '9999-12-31';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -409,7 +409,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Sales.OrderLines where LastEditedWhen > '@{variables('CutoffDate')}'",
+							"value": "select * from Sales.OrderLines where LastEditedWhen > '@{variables('CutoffDate')}';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -478,7 +478,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers where ValidFrom > '@{variables('CutoffDate')}' union select CustomerID, CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation.ToString() as DeliveryLocation, PostalAddressLine1, PostalAddressLine2, PostalPostalCode, LastEditedBy, ValidFrom, ValidTo from Sales.Customers_Archive where ValidFrom > '@{variables('CutoffDate')}'",
+							"value": "select * from Sales.Customers for system_time from '@{variables('CutoffDate')}' to '9999-12-31';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
