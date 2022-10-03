@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "variables('CutoffDate')if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect top 10 * from Warehouse.PackageTypes for system_time from '@{variables('CutoffDate')}' to '9999-12-31';\nelse\nselect top 10 * from Sales.Invoices where LastEditedWhen > @{variables('CutoffDate')};",
+										"value": "variables('CutoffDate')if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect top 10 * from Warehouse.PackageTypes for system_time from '@{variables('CutoffDate')}' to '9999-12-31';\nelse\nselect top 10 * from Sales.Invoices where LastEditedWhen > '@{variables('CutoffDate')}';",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
