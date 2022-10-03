@@ -43,13 +43,13 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "etl_cutoff_time",
-					"value": "2010-1-1"
+					"variableName": "CutoffDate",
+					"value": ""
 				}
 			}
 		],
 		"variables": {
-			"etl_cutoff_time": {
+			"CutoffDate": {
 				"type": "String",
 				"defaultValue": "2010-1-1"
 			}
