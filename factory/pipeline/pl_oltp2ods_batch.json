@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect top 10 * from @{item().SchemaTableName} for system_time from '2012-12-12' to '9999-12-31'\nelse\nselect top 10 * from @{item().SchemaTableName}",
+										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect top 10 * from @{item().SchemaTableName} for system_time from '2012-12-12' to '9999-12-31';\nelse\nselect top 10 * from @{item().SchemaTableName};",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
