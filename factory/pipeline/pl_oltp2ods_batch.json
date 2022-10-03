@@ -235,9 +235,6 @@
 			"CutoffDate": {
 				"type": "String",
 				"defaultValue": "2010-1-1"
-			},
-			"LoadTableName": {
-				"type": "String"
 			}
 		},
 		"folder": {
