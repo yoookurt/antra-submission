@@ -89,7 +89,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": true,
+									"sqlWriterUseTableLock": false,
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
