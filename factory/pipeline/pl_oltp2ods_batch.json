@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 1\nselect * from @{item().SchemaTableName} for system_time from '@{variables('CutoffDate')}' to '9999-12-31';\nelse\nselect * from @{item().SchemaTableName} where LastEditedWhen > '@{variables('CutoffDate')}';",
+										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect * from @{item().SchemaTableName} for system_time from '@{variables('CutoffDate')}' to '9999-12-31'\nelse\nselect * from @{item().SchemaTableName} where LastEditedWhen > '@{variables('CutoffDate')}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
