@@ -1,5 +1,5 @@
 {
-	"name": "pl_oltp2ods_batch_copy1",
+	"name": "pl_oltp2ods_batch_test",
 	"properties": {
 		"activities": [
 			{
@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') as isTemporal;",
+										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+20 as isTemporal;\nelse\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+50 as isTemporal;",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
