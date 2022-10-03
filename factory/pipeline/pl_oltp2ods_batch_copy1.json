@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select '@{item().SchemaTableName}', OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType');",
+										"value": "select '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') as isTemporal;",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
