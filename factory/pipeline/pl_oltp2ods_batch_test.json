@@ -80,7 +80,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+20 as isTemporal;\nelse\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+50 as isTemporal;",
+										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+20 as isTemporal, count(select * from @{item().SchemaTableName}) as cnt;\nelse\nselect '@{item().SchemaTableName}' as tableName, OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType')+50 as isTemporal, count(select * from @{item().SchemaTableName}) as cnt;",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
