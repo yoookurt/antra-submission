@@ -58,7 +58,14 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -80,7 +87,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "if OBJECTPROPERTY(OBJECT_ID('@{item().SchemaTableName}'), 'TableTemporalType') = 2\nselect top 10 * from @{item().SchemaTableName} for system_time from '2012-12-12' to '9999-12-31'\nelse\nselect top 10 * from @{item().SchemaTableName}",
+										"value": "if OBJECTPROPERTY(OBJECT_ID('@{variables('LoadTableName')}'), 'TableTemporalType') = 2\nselect top 10 * from @{variables('LoadTableName')} for system_time from '2012-12-12' to '9999-12-31'\nelse\nselect top 10 * from @{variables('LoadTableName')}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -119,6 +126,16 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LoadTableName",
+								"value": "@{item().SchemaTableName}"
+							}
 						}
 					]
 				}
