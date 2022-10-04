@@ -46,6 +46,66 @@
 					"variableName": "CutoffDate",
 					"value": ""
 				}
+			},
+			{
+				"name": "pl_oltp2ods_batch",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_oltp2ods_batch",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_ods2integration",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pl_oltp2ods_batch",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_ods2integration",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_integration2dw",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pl_ods2integration",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_integration2dw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"variables": {
