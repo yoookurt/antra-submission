@@ -1,0 +1,245 @@
+{
+	"name": "pl_oltp2ods_batch_full",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select TABLE_SCHEMA, TABLE_NAME, concat(TABLE_SCHEMA, '.', TABLE_NAME) as SchemaTableName from INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_CATALOG='WideWorldImporters';",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_wwi_oltp",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter1_array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Filter1_str",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter1_array').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "."
+								},
+								{
+									"name": "Destination",
+									"value": "@{'<SchemaName>'}.@{'<TableName>'}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select * from @{item().SchemaTableName};",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_wwi_oltp",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_wwi_ods",
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": "@item().TABLE_SCHEMA",
+										"TableName": "@item().TABLE_NAME"
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Filter1_array",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tables2Move_array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(variables('TableNameArray_array'), item().SchemaTableName)\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Tables2Move_array",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableNameArray_array",
+					"value": [
+						"Warehouse.StockItems",
+						"Warehouse.PackageTypes",
+						"Application.People",
+						"Sales.OrderLines",
+						"Sales.Orders",
+						"Sales.Customers",
+						"Sales.Invoices"
+					]
+				}
+			},
+			{
+				"name": "Tables2Move_str",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableNameArray_str",
+					"value": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
+				}
+			},
+			{
+				"name": "Filter1_str",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tables2Move_str",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(variables('TableNameArray_str'), item().SchemaTableName)\n",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"TableNameArray_str": {
+				"type": "String",
+				"defaultValue": "Warehouse.StockItems, Warehouse.PackageTypes, Application.People, Sales.OrderLines, Sales.Orders, Sales.Customers, Sales.Invoices"
+			},
+			"TableNameArray_array": {
+				"type": "Array",
+				"defaultValue": [
+					"Warehouse.StockItems",
+					"Warehouse.PackageTypes",
+					"Application.People",
+					"Sales.OrderLines",
+					"Sales.Orders",
+					"Sales.Customers",
+					"Sales.Invoices"
+				]
+			},
+			"IngestDate": {
+				"type": "String",
+				"defaultValue": "2012-12-12"
+			},
+			"CutoffDate": {
+				"type": "String",
+				"defaultValue": "2010-1-1"
+			}
+		},
+		"folder": {
+			"name": "wwi"
+		},
+		"annotations": []
+	}
+}
