@@ -190,7 +190,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Fact",
-							"TableName": "Customers_Staging"
+							"TableName": "Invoice_Staging"
 						}
 					}
 				]
