@@ -26,7 +26,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"PersonID"
+								"PackageTypeID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -41,7 +41,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "People_Staging"
+							"TableName": "PackageType_Staging"
 						}
 					}
 				],
@@ -51,13 +51,67 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "People"
+							"TableName": "PackageType"
 						}
 					}
 				]
 			},
 			{
 				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"CustomerD"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "Customers_Staging"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "Customers"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data3",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
