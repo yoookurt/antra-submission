@@ -41,7 +41,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "PackageType_Staging"
+							"TableName": "PackageTypes_Staging"
 						}
 					}
 				],
@@ -51,7 +51,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "PackageType"
+							"TableName": "PackageTypes"
 						}
 					}
 				]
