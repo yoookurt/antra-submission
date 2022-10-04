@@ -80,7 +80,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"CustomerD"
+								"CustomerID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -134,7 +134,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"CustomerID"
+								"PersonID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -149,7 +149,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "Customers_Staging"
+							"TableName": "People_Staging"
 						}
 					}
 				],
@@ -159,7 +159,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "Dimension",
-							"TableName": "Customers"
+							"TableName": "People"
 						}
 					}
 				]
