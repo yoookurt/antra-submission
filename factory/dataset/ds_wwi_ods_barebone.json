@@ -1,0 +1,15 @@
+{
+	"name": "ds_wwi_ods_barebone",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqlsvr_wwi_ods",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "wwi"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
