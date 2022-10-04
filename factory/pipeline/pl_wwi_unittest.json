@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from from [Invoices] i join [Orders] o on o.OrderID = i.OrderID join [OrderLines] ol on ol.OrderID = o.OrderID;",
+						"sqlReaderQuery": "select * from [Sales].[Invoices] i join [Sales].[Orders] o on o.OrderID = i.OrderID join [Sales].[OrderLines] ol on ol.OrderID = o.OrderID;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
