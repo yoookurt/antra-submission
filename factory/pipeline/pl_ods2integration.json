@@ -268,6 +268,67 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy data5",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"StockItemID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_ods",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Warehouse",
+							"TableName": "StockItems"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "StockItems_Staging"
+						}
+					}
+				]
 			}
 		],
 		"variables": {
