@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data6",
+				"name": "Copy data3",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,43 +17,41 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "select * from Sales.Customers for system_time from '@{variables('CutoffDate')}' to '9999-12-31';",
-							"type": "Expression"
-						},
+						"sqlReaderQuery": "select * from from [Invoices] i join [Orders] o on o.OrderID = i.OrderID join [OrderLines] ol on ol.OrderID = o.OrderID;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": true,
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"OrderID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
-					{
-						"referenceName": "ds_wwi_oltp",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
 					{
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "Sales",
-							"TableName": "Customers"
+							"SchemaName": "Sales"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Fact",
+							"TableName": "Sales_Staging"
 						}
 					}
 				]
