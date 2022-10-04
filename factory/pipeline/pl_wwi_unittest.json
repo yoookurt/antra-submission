@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select top 5 * from Application.People;",
+						"sqlReaderQuery": "select top 5 PersonID, FullName from Application.People;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
