@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data2",
+				"name": "Copy data6",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -13,25 +13,12 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "TABLE_SCHEMA",
-						"value": "Application"
-					},
-					{
-						"name": "TABLE_NAME",
-						"value": "People"
-					},
-					{
-						"name": "Source",
-						"value": "."
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Warehouse.PackageTypes where ValidFrom > '@{variables('CutoffDate')}'",
+							"value": "select * from Sales.Customers for system_time from '@{variables('CutoffDate')}' to '9999-12-31';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -43,7 +30,7 @@
 						"upsertSettings": {
 							"useTempDB": false,
 							"keys": [
-								"PackageTypeID"
+								"CustomerID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -71,8 +58,8 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "Warehouse",
-							"TableName": "PackageTypes"
+							"SchemaName": "Sales",
+							"TableName": "Customers"
 						}
 					}
 				]
