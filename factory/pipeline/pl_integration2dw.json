@@ -242,7 +242,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"StockItemID"
+								"SaleID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -256,8 +256,8 @@
 						"referenceName": "ds_wwi_integration",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "Dimension",
-							"TableName": "StockItems_Staging"
+							"SchemaName": "Fact",
+							"TableName": "Sales_Staging"
 						}
 					}
 				],
@@ -266,8 +266,8 @@
 						"referenceName": "ds_wwi_dw",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "Dimension",
-							"TableName": "StockItems"
+							"SchemaName": "Fact",
+							"TableName": "Sales"
 						}
 					}
 				]
