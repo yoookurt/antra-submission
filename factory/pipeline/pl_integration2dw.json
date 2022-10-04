@@ -38,13 +38,21 @@
 				"inputs": [
 					{
 						"referenceName": "ds_wwi_integration",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "People_Staging"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_wwi_dw",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "People"
+						}
 					}
 				]
 			}
