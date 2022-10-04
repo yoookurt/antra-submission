@@ -1,0 +1,15 @@
+{
+	"name": "AzureSqlDatabaseDestinationStore",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqlsvr_wwi_integration",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "template_ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
