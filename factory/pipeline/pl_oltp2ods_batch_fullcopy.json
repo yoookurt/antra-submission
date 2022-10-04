@@ -1,5 +1,5 @@
 {
-	"name": "pl_oltp2ods_batch_full",
+	"name": "pl_oltp2ods_batch_fullcopy",
 	"properties": {
 		"activities": [
 			{
