@@ -5,7 +5,14 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -62,9 +69,70 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "CutoffDate",
-					"value": "2010-01-01"
+					"variableName": "IngestDate",
+					"value": "2012-12-12"
 				}
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"PersonID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_ods",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Sales",
+							"TableName": "Customers"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Fact",
+							"TableName": "Customers_Staging"
+						}
+					}
+				]
 			}
 		],
 		"variables": {
