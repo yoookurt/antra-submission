@@ -134,7 +134,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"CustomerD"
+								"CustomerID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
@@ -160,6 +160,60 @@
 						"parameters": {
 							"SchemaName": "Dimension",
 							"TableName": "Customers"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data4",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"StockItemID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "StockItems_Staging"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "StockItems"
 						}
 					}
 				]
