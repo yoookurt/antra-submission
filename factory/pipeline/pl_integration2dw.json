@@ -242,7 +242,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"SaleID"
+								"OrderID"
 							]
 						},
 						"sqlWriterUseTableLock": false,
