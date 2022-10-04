@@ -38,12 +38,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_wwi_ods",
-						"type": "DatasetReference",
-						"parameters": {
-							"SchemaName": "Sales",
-							"TableName": "Invoices"
-						}
+						"referenceName": "ds_wwi_ods_barebone",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
