@@ -15,21 +15,46 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"PersonID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
 					"enableStaging": false
-				}
-			},
-			{
-				"name": "Stored procedure1",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
 				},
-				"userProperties": []
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_ods",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Application",
+							"TableName": "People"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Fact",
+							"TableName": "People_Staging"
+						}
+					}
+				]
 			}
 		],
 		"folder": {
