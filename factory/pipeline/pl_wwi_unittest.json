@@ -22,12 +22,8 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_wwi_ods",
-						"type": "DatasetReference",
-						"parameters": {
-							"SchemaName": "Application",
-							"TableName": "People"
-						}
+						"referenceName": "ds_wwi_ods_barebone",
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
 				}
