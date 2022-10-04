@@ -207,6 +207,67 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy data4",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"PackageTypeID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_wwi_ods",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Warehouse",
+							"TableName": "PackageTypes"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_wwi_integration",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "Dimension",
+							"TableName": "PackageTypes_Staging"
+						}
+					}
+				]
 			}
 		],
 		"variables": {
