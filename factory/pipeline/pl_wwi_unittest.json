@@ -41,7 +41,8 @@
 						"referenceName": "ds_wwi_ods",
 						"type": "DatasetReference",
 						"parameters": {
-							"SchemaName": "Sales"
+							"SchemaName": "Sales",
+							"TableName": "Invoices"
 						}
 					}
 				],
