@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from Sales.Customers for system_time from '@{variables('CutoffDate')}' to '9999-12-31';",
+							"value": "select * from Sales.Customers;",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -33,7 +33,7 @@
 								"CustomerID"
 							]
 						},
-						"sqlWriterUseTableLock": false,
+						"sqlWriterUseTableLock": true,
 						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
