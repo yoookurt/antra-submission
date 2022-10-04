@@ -2,7 +2,7 @@
 	"name": "ds_wwi_dw",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "sqlsvr_wwi_ods",
+			"referenceName": "sqlsvr_wwi_dw",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
