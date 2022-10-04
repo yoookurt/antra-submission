@@ -1,0 +1,14 @@
+{
+	"name": "AzureSqlDatabaseSourceDatasetEntity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqlsvr_wwi_ods",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "template_ingestion"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable"
+	}
+}
